@@ -1,0 +1,55 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+.movie-content{
+    margin-top: 5px;
+    width: 245px;
+    margin-bottom: 20px;
+    background-color: lightslategray;
+    border: 2px solid lightgray;
+    border-radius: 20px;
+    height: 470px;
+}
+
+
+.Img-card{
+    width: 100%;
+    height: 340px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.box-text{
+    display: grid;
+    gap: 10px;
+}
+.title-movie{
+    overflow: hidden; 
+    text-align: center;
+    text-decoration: none;
+    height: 25px;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 23px;
+}
+.container-mvtype{
+    overflow: hidden; 
+    text-align: center;
+}
+.button-mvc{
+    overflow: hidden; 
+    text-align: center;
+}
+.btn-play{
+    background: #E0FF30;
+    color: #333;
+    font-size: 18px;
+    font-weight: 540;
+    display: inline-block;
+    margin: 3px 0 3px 0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+}
+.btn-play:hover{
+    transform: translateY(-3px);
+} */

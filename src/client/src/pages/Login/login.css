@@ -1,0 +1,43 @@
+.auth-form-container {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	/* min-height: 50vh; */
+	align-items: center;
+	justify-content: center;
+	margin: 3rem;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+}
+
+
+/*
+label {
+	text-align: left;
+	padding: 0.25rem 0;
+}
+
+input {
+	margin: 0.5rem 0;
+	padding: 1rem;
+	border: none;
+	border-radius: 10px;
+}
+
+button {
+	/* border: 3px;
+	background-color: white;
+	padding: 20px;
+	border-radius: 25px;
+	cursor: pointer;
+	color: #7439db;
+}
+
+.link-btn {
+	background: none;
+	color: white;
+	text-decoration: underline;
+} */

@@ -1,0 +1,36 @@
+/* .movieshowing{
+    width: 100%;
+}
+.feature{
+    width: 100%;
+    background-color: lightgray;
+    border-bottom: 1px solid #000;
+}
+.mscontainer{
+    width: 100%;
+    background-color: cadetblue;
+    margin: auto;
+}
+
+.mstitle{
+    height: 50px;
+    border-bottom: 1px solid black;
+    overflow: hidden; 
+    text-align: left;
+}
+.mstitle span{
+    color: #000;
+    font-size: 27px;
+    font-weight: 500;
+    display: inline-block;
+    margin: 10px 10px 0 50px;
+    padding: 5px 6px
+}
+.listcard{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+} */

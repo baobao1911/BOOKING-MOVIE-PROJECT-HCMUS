@@ -1,0 +1,108 @@
+.account-main {
+    width: 100%;
+    margin: 0;
+}
+.container-account{
+    width: 100%;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+}
+.account{
+    height: 100%;
+    width: 70%;
+    background-color: rgb(238, 187, 121);
+    
+    color: black;
+    display: flex;
+    /* align-items: center; */
+    justify-content: start;
+}
+.select-page-account{
+    background-color: aqua;
+    width: 250px;
+}
+
+.page{
+    height: 50px;
+    background-color: #d766d7;
+    border-radius: 5px;
+    width: 90%;
+}
+.account-contant {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.account .account-detail{
+    width: 80%;
+}
+
+.account .page-title{
+    text-align: center;
+    background-color: azure;
+    border-radius: 5px ;
+    margin-top: 10px;
+}
+.account .image-profile{
+    background-color: rgb(156, 225, 202);
+    border: 2px solid black;
+}
+.account .avatar{
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.account .format-profile{
+    margin-top: 50px;
+}
+.account .my-profile{
+    display: flex;
+    justify-content: space-between;
+}
+.account .show-barcode-my{
+    text-align: center;
+}
+.account .welcome-msg{
+    margin-top: 20px;
+    text-align: center;
+}
+.account .box-title{
+    margin-top: 15px;
+}
+.account .box-account{
+    border-top: 1px solid black;
+    margin-top: 20px;
+}
+.account .box-head{
+    text-align: center;
+}
+.scaffold ul li {
+    margin-top: 10px;
+}
+.account .fields{
+    margin-top: 10px;
+}
+
+.account .fields input{
+    border-radius: 5px;
+}
+.account .btn-submit{
+    background-color: darkgray;
+    height: 35px;
+    width: 130px;
+    border-radius: 10px;
+}
+.account .form-addmv ul li{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.account .form-addmv ul li input{
+    width: 300px;
+    border-radius: 10px;
+    border: 0.5px solid azure;
+    text-align: center;
+    height: 30px;
+}

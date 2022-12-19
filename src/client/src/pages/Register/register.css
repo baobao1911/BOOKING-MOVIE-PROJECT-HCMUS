@@ -1,0 +1,10 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap'); */
+.sign-up-form {
+    display: flex;
+	flex-direction: column;
+	text-align: center;
+	/* min-height: 50vh; */
+	align-items: center;
+	justify-content: center;
+	margin: 3rem;
+}
