@@ -6,7 +6,10 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
 	const { user } = useContext(AuthContext);
-	console.log(user.username);
+	const { loading, error, dispatch } = useContext(AuthContext);
+	const handleLogout =()=>{
+		dispatch({ type: "LOGOUT" });
+	}
 	return (
 		<div className="navbar-container">
 			<div className="navbar">
