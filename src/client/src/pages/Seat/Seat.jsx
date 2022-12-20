@@ -32,8 +32,8 @@ const Seat = () => {
     const [movie_id,setMvid] = useState(undefined) 
     const [customer_id,setCsid] = useState(undefined)
     const [seat_number,setSeatnumber]  = useState(undefined)
-    const [cinema_complex,setCinema] = useState('chọn rạp')
-    const [movie_show_time,setGettime] = useState('chọn giờ chiếu')
+    const [address,setCinema] = useState('chọn rạp')
+    const [date,setGettime] = useState('chọn giờ chiếu')
 
     //==============================
     function updateSelectedCount() {
@@ -77,22 +77,24 @@ const Seat = () => {
       return d.toLocaleString('es-us')
     }
 
-    const handlePayment = async (e) => {
-      e.preventDefault();
+    // const handlePayment = async (e) => {
+    //   e.preventDefault();
 
-      if (user) {
-        setCsid(user._id)
+    //   if (user) {
+    //     setCsid(user._id)
         
-        try {
-          const res = await axios.post(`http://localhost:8000/api/tickets/${movie_id}`,{movie_id,customer_id,seat_number,cinema_complex,movie_show_time});
-          console.log(res);
-        } catch (err) {
-          console.log(err);
-
-        }
-      }
+    //     try {
+    //       const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,{movie_id,customer_id,seat_number,address,date});
+    //       console.log(res);
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
+    //   }
       
-    };
+    // };
+    const handlePayment = ()=>{
+      console.log(typeof(listseat.textContent))
+    }
   //==================================================
   return (
     <section>
@@ -119,13 +121,13 @@ const Seat = () => {
           </li>    
         </ul>
 
-        <select value={cinema_complex} onChange={e => setCinema(e.target.value)} className="cinema_complex">
+        <select value={address} onChange={e => setCinema(e.target.value)} className="address">
           {adrs && adrs.map ((item,idx) => (
             <option  key={idx} value={item}> {item}</option>
           ))}
         </select>
 
-        <select value={movie_show_time} onChange={e=>setGettime(e.target.value)} className="time">
+        <select value={date} onChange={e=>setGettime(e.target.value)} className="time">
           {time && time.map ((item,idx) => (
             <option key={idx} value={item}> {setupTime(item)}</option>
           ))}

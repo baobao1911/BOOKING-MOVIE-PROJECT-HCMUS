@@ -24,10 +24,16 @@ const Navbar = () => {
 				</Link>
 
 				{user ? (
-					<div className="logo-user">
-						<Link to="/account"> 
-						<img  src="https://www.redditstatic.com/avatars/avatar_default_01_A5A4A4.png" alt="" />
-						</Link>
+					<div className="userinfo">
+						<div className="btn-logout">
+							<input type="button" value="Logout" onClick={handleLogout}/>
+						</div>
+						<div className="logo-user">
+							<span>{user.username}</span>
+							<Link className="logo-link" to="/account"> 
+								<img  src="https://www.redditstatic.com/avatars/avatar_default_01_A5A4A4.png" alt="" />
+							</Link>
+						</div>
 					</div>
 				) : (
 					<div className="navItems">

@@ -39,3 +39,19 @@
 .navContainer span {
     color: red;
 }
+
+.userinfo{
+    display: flex;
+    justify-content: start;
+}
+.btn-logout{
+    margin: auto 20px auto 0px;
+}
+.btn-logout input {
+    border-radius: 10px;
+    border: 1px solid lightskyblue;
+    background-color: lightslategray;
+}
+.logo-user span{
+    margin: auto 7px auto 0;
+}
