@@ -22,7 +22,7 @@ const Navbar = () => {
 						src={process.env.PUBLIC_URL + "/icon.png"}
 						alt="Logo"
 						width="200px"
-						class="logo"
+						className="logo"
 					/>
 				</Link>
 
