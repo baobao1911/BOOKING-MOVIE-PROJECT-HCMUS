@@ -1,4 +1,7 @@
 // import { Swiper, SwiperSlide } from "swiper/react";
+import { useEffect } from "react";
+import { useState } from "react";
+import useFetch from "../../hooks/useFetch";
 import "./feature.css";
 // import { Autoplay, Pagination, Navigation } from "swiper";
 
@@ -8,9 +11,22 @@ import "./feature.css";
 // import "swiper/css/navigation";
 
 const Feature = () => {
+	const { data, loading, error } = useFetch(
+		"http://localhost:8000/api/movies"
+	);
+	const [imgBanner,setImgBanner] = useState()
 	return (
 		<div className="feature">
-			feature
+		    {loading ? (
+				console.log("loading api")
+				) : (
+			<div className="feature-container">
+				<div className="banner">
+					nguvcl
+				</div>
+			</div>
+			)}
+
 			{/* <section className="popupar container_f" id="popular">
 				<div className="heading">
 					<h2 className="heading-title">Popular Movies</h2>

@@ -4,8 +4,7 @@
 	color: white;
 	display: flex;
 	justify-content: center;
-	border-bottom: 2px solid black;
-	border-top: 1px solid black;
+	border-bottom: 0.5px solid white;
 	width: 100%;
 }
 
@@ -17,4 +16,35 @@
 .headerList {
 	display: flex;
 	gap: 60px;
+}
+.header .headerList{
+	height: 100%;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.header .linkto .linkk{
+	margin: auto 10px auto 50px;
+	text-decoration: none;
+	color: aliceblue;
+}
+.header .search{
+	margin: auto 50px auto 0px;
+}
+.header .search input {
+    width: 300px;
+    border-radius: 15px;
+    border: 0.5px solid azure;
+    text-align: center;
+    height: 30px;
+	margin: auto 20px auto 0px;
+}
+.header .btn-search{
+	border-radius: 50%;
+	border: none;
+}
+.header .btn-search:hover{
+	background-color: lightyellow;
+	transform: translateX(-1px);
 }

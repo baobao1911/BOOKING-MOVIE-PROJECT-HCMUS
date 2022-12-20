@@ -1,0 +1,23 @@
+.feature{
+    min-height: 500px;
+    width: 100%;
+    background-color: #444451;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid white;
+}
+.feature-container{
+    background-color: #555541;
+    min-height: 500px;
+    width: 80%;
+    max-width: 1024px;
+    color: white;
+    text-align: center;
+}
+
+/* .feature .banner{
+    height: 200px;
+} */
+.feature .feature-container{
+    display: inline-block;
+}
