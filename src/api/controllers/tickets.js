@@ -6,6 +6,7 @@ const { createError } = require("../utils/error.js");
 const createTicket = async (req, res, next) => {
 	const movieId = req.params.movie_id;
 	req.body["movie_id"] = movieId;
+
 	const newTicket = new Ticket(req.body);
 
 	try {
@@ -14,7 +15,7 @@ const createTicket = async (req, res, next) => {
 			throw new Error("Invalid seat");
 		}
 
-		var savedTicket = await newTicket.save();
+		let savedTicket = await newTicket.save();
 		await Movie.findByIdAndUpdate(movieId, {
 			$addToSet: {
 				booked_tickets: savedTicket._id,
@@ -25,8 +26,8 @@ const createTicket = async (req, res, next) => {
 	} catch (err) {
 		if (err.message === "Invalid seat") {
 			next(createError(409, "The seat has been booked."));
-		} else if (Dataloi) {
-			next(createError(500, err));
+		// } else if (err.message !== null) {
+		// 	next(createError(500, err));
 		} else {
 			next(err);
 		}
@@ -104,4 +105,17 @@ const getAllTicketsOfAnUser = async (req, res, next) => {
 	}
 };
 
-module.exports = { getAllTicketsOfAnUser, getAllTicketsOfAMovie, getTicket, createTicket, deleteTicket, updateTicket }
+// Get all movies query = min=?&max=?&limit=?
+const getAllTickets = async (req, res, next) => {
+	const { ...others } = req.query;
+	try {
+		const allTickets = await Ticket.find({
+			...others,
+		}).limit(req.query.limit);
+		res.status(200).json(allTickets);
+	} catch (err) {
+		next(err);
+	}
+}
+
+module.exports = { getAllTickets, getAllTicketsOfAnUser, getAllTicketsOfAMovie, getTicket, createTicket, deleteTicket, updateTicket }

@@ -13,7 +13,8 @@ const MovieSchema = new mongoose.Schema({
 		required: true,
 	},
 	photos: {
-		type: [String],
+		type: String,
+		require: true,
 	},
 	desc: {
 		type: String,
@@ -25,7 +26,7 @@ const MovieSchema = new mongoose.Schema({
 		max: 5,
 	},
 	booked_seats: {
-		type: [Number],
+		type: [String],
 	},
 	booked_tickets: {
 		type: [String],

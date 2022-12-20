@@ -11,22 +11,22 @@ const { verifyAdmin, verifyUser } = require("../utils/verify.js");
 
 const router = express.Router();
 
-//CREATE
-router.post("/:movie_id", verifyAdmin, createTicket);
+// Create ticket
+router.post("/:id/:movie_id", verifyUser, createTicket);
 
-//UPDATE
+// Update ticket
 router.put("/:id", verifyAdmin, updateTicket);
 
-//DELETE
-router.delete("/:id/:movie_id", verifyAdmin, deleteTicket);
+// Delete ticket
+router.delete("/:movie_id", verifyAdmin, deleteTicket);
 
-// GET A TICKET
+// Get a ticket
 router.get("/:id", verifyAdmin, getTicket);
 
-// GET TICKETS OF USER
-router.get("/user/:user_id", verifyUser, getAllTicketsOfAnUser);
+// Get all user's tickets
+router.get("/users/:id", verifyUser, getAllTicketsOfAnUser);
 
-// GET TICKETS OF MOVIE
-router.get("/movie/:movie_id", verifyAdmin, getAllTicketsOfAMovie);
+// Get all movies's tickets
+router.get("/movies/:movie_id", verifyAdmin, getAllTicketsOfAMovie);
 
 module.exports = router;

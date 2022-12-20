@@ -47,7 +47,7 @@ const getMovie = async (req, res, next) => {
 	}
 };
 
-// Get all movies
+// Get all movies query = min=?&max=?&limit=?
 const getAllMovies = async (req, res, next) => {
 	const { min, max, ...others } = req.query;
 	try {

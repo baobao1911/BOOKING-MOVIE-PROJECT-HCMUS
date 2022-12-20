@@ -10,7 +10,7 @@ const TicketSchema = new mongoose.Schema(
       required: true,
     },
     seat_number: {
-      type: Number,
+      type: String,
       required: true,
     },
     address: {
