@@ -11,15 +11,13 @@
 .account{
     height: 100%;
     width: 70%;
-    background-color: rgb(238, 187, 121);
-    
+    background-color: rgb(184, 171, 153);
     color: black;
     display: flex;
-    /* align-items: center; */
     justify-content: start;
 }
 .select-page-account{
-    background-color: aqua;
+
     width: 250px;
 }
 
@@ -41,7 +39,6 @@
 .account .page-title{
     text-align: center;
     background-color: azure;
-    border-radius: 5px ;
     margin-top: 10px;
 }
 .account .image-profile{
@@ -94,15 +91,57 @@
     width: 130px;
     border-radius: 10px;
 }
-.account .form-addmv ul li{
+.account .form-addmv ul li,.account .acc-deletemv ul li{
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
 }
-.account .form-addmv ul li input{
+.account .form-addmv ul li input, .account .fields input , .account .acc-deletemv ul li input{
     width: 300px;
-    border-radius: 10px;
+    border-radius: 15px;
     border: 0.5px solid azure;
     text-align: center;
     height: 30px;
+}
+.account .rank{
+    margin-top: 20px;
+}
+.account .setrank{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align:center
+}
+.account .setrank div{
+    width: 33%;
+    display: inline-block;
+}
+
+.rank-account span{
+    margin-left: 15px;
+}
+.account .fields{
+    display: flex;
+    justify-content: space-between;
+}
+.account .legend{
+    text-align: center;
+}
+.account .btnpage2 , .account .btn2-delmv , .account .rev-btn{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.account .btnpage2 input, .account .btn2-delmv input , .account .rev-btn input{
+    height: 40px;
+    width: 100px;
+    border-radius: 30px;
+    border: 0.5px solid darkgray;
+}
+.account .revenuemv{
+    text-align: center;
+}
+.account .revenuemv p{
+    display: inline-block;
 }

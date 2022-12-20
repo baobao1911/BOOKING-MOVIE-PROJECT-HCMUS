@@ -1,11 +1,14 @@
 import React from 'react'
+import { useContext } from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import Navbar from '../../components/Navbar/Navbar'
+import { AuthContext } from '../../context/AuthContext'
 import './account.css'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRankingStar } from '@fortawesome/free-solid-svg-icons'
 const Account = () => {
     const [page,setPage] = useState("1")
     const [avatar,setAvatar] = useState("https://www.redditstatic.com/avatars/avatar_default_01_A5A4A4.png")
@@ -13,15 +16,16 @@ const Account = () => {
     const handleChangePage = e =>{
         setPage(e)
     }
+    const {user } = useContext(AuthContext)
+    const navigate = useNavigate()
     // ==================== function =====================
-    function hideButtonSubmit(e){
-        // var checkBox = document.getElementById("conformsubmit");
-        var buttonSubmit = document.getElementsByID("btn")
+    function handleSubmidaddmv(e){
+        var checkbox = document.getElementsByID("btn1-admin")
 
         if (e === true){
-            buttonSubmit.style.display = "block";
+            checkbox.style.display = "block";
           } else {
-            buttonSubmit.style.display = "none";
+            checkbox.style.display = "none";
           }
     }
     function handleCheckbox(e){
@@ -34,10 +38,13 @@ const Account = () => {
           }
     }
     //====================================================
+    console.log(user)
     return (
+    
     <div className='account-main'>
         <Navbar/>
         <Header/>
+        {user ? (
         <div className="container-account">
 
             <div className="account">
@@ -73,8 +80,26 @@ const Account = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div className="rank">
+                                            <div className="setrank">
+                                                <div className='rank-account'>
+                                                    <p>Cấp độ tài khoản</p>
+
+                                                    <FontAwesomeIcon icon={faRankingStar} />
+                                                    <span>Đáy Rank</span>
+                                                </div>
+                                                <div className="total-movie-watched">
+                                                    <p>Tổng chi tiêu</p>
+                                                    <p>10000 <span>vnđ</span></p>
+                                                </div>
+                                                <div className="point">
+                                                    <p>Điểm Fox</p>
+                                                    <p>0 <span>Đ</span>  </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="welcome-msg"  >
-                                            <p className="hello"><strong>Xin chào bao nguyen,</strong></p>
+                                            <p className="hello"><strong>Xin chào {user.username},</strong></p>
                                             <p>Với trang này, bạn sẽ quản lý được tất cả thông tin tài khoản của mình.</p>
                                         </div>
                                     </div>
@@ -82,21 +107,13 @@ const Account = () => {
                                         <div className="box-head"  >
                                             <h3>Thông tin tài khoản</h3>
                                         </div>
+
                                         <div className="box"  >
-                                            
                                             <div className="box-content box-content-my col2-set"  >
-                                                <span>Tên : bao nguyen</span><br/>
-                                                <span>Email : jonnybao091@gmail.com</span><br/>
-                                                <span>Tên đăng nhập : 0377707361</span><br/>
-                                                <span>Điện thoại : 0377707361</span><br/>
-                                            </div>
-                                            <div className="box-title"  >
-                                                <span>Bạn có muốn thay đổi thông tin của mình không ? </span>
-                                                <div className='change-checkbox'>
-                                                    <input type="checkbox"/>
-                                                    <em>Đồng ý </em>
-                                                </div>
-                                                
+                                                <span>Tên : {user.firstName} {user.lastName}</span><br/>
+                                                <span>Email : {user.email}</span><br/>
+                                                <span>Tên đăng nhập : {user.username}</span><br/>
+                                                <span>Điện thoại : {user.phone}</span><br/>
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +172,6 @@ const Account = () => {
                                         </li>
 
                                         <li className="fields field-country">
-                                            <div className="field field-country-first"   >
                                                 <label htmlFor="region_id" className="required "><em>*</em>Thành phố/Tỉnh</label>
                                                 <div className="input-box"   >
                                                     <select id="region_id" name="region_id" title="Tỉnh/Tp" className="validate-select validation-passed">
@@ -225,8 +241,7 @@ const Account = () => {
                                                         <option value="07">Tuyen Quang</option>                                                       
                                                         <option value="70">Vinh Phuc</option>                                                       
                                                     </select>
-                                                </div>
-                                            </div>
+                                                </div>                                      
                                         </li>
 
                                         <li className="fields wide" >
@@ -242,9 +257,20 @@ const Account = () => {
                                                 <label className="change-pass-normal" htmlFor="change_password">Tôi muốn thay đổi mật khẩu</label>
                                             </div>
 
-                                            <div className="fieldset changepass" id='changepassword' style={{display:"none"}}>
+                                            
+                                        </li>
+                                    </ul>
+                                    <div className="fieldset changepass" id='changepassword' style={{display:"none"}}>
                                                 <h2 className="legend">Đổi mật khẩu</h2>
                                                 <ul className="form-list">
+                                                    <li className="fields">
+                                                        <div className="field left"   >
+                                                            <label htmlFor="password" className="required"><em>*</em>Mật khẩu cũ</label>
+                                                            <div className="input-box"   >
+                                                                <input type="password" title="Mật khẩu cũ" className="input-text required-entry validate-password" name="password" id="password" aria-autocomplete="list"/>
+                                                            </div>
+                                                        </div>
+                                                    </li>
                                                     <li className="fields">
                                                         <div className="field left"   >
                                                             <label htmlFor="password" className="required"><em>*</em>Mật khẩu mới</label>
@@ -252,6 +278,8 @@ const Account = () => {
                                                                 <input type="password" title="Mật khẩu mới" className="input-text required-entry validate-password" name="password" id="password" aria-autocomplete="list"/>
                                                             </div>
                                                         </div>
+                                                    </li>
+                                                    <li className="fields">
                                                         <div className="field right"   >
                                                             <label htmlFor="confirmation" className="required"><em>*</em>Nhập lại mật khẩu mới</label>
                                                             <div className="input-box"   >
@@ -261,9 +289,9 @@ const Account = () => {
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </li>
-                                    </ul>
-                                    <input type="button" value="Submit" className='btn-submit'/>
+                                    <div className='btnpage2'>
+                                        <input type="button" value="Submit" className='btn-page2'/>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -328,16 +356,60 @@ const Account = () => {
                                             <input type="text" name='address' className='address' placeholder='nhập địa chỉ rạp chiếu'/>
                                         </li>
                                     </ul>
-                                    <div>
-                                        <input type="checkbox" name="conformsubmit" id='conformsubmit' onClick={e => hideButtonSubmit(e.target.checked)} />
+                                    <div className='checkbox-addmv'>
+                                        <input type="checkbox" name="conformsubmit" id='conformsubmit' onClick={e => handleSubmidaddmv(e.target.checked)} />
                                         <e>Đồng ý thêm phim</e>
                                     </div> 
-                                    <input type="button" value="Submit" className='btn-submit' id='btn' style={{display : "none"}}/>
+
                                 </form>
                             </div>
 
-                            <div className="delete-movie">
+                            <div className="my-account">
+                                <div className="page-title">
+                                    <h1>Xóa phim</h1>
+                                </div>
+                                <form className='acc-deletemv'>
+                                    <ul>
+                                        <li>
+                                            <em>Tên phim</em>
+                                            <input type="text" name='name' placeholder='nhập tên phim' />
+                                
+                                        </li>
+                                        <li>
+                                            <em>Địa chỉ</em>
+                                            <input type="text" name='name' placeholder='nhập địa chỉ rạp chiếu' />
+                                        </li>
+                                    </ul>
+                                </form>
+                                <div className="btn2-delmv">
+                                    <input type="button" value="Submit" />
+                                </div>
+                            </div>
 
+                            <div className="my-account">
+                                <div className="page-title">
+                                    <h1>Xem só ghế đã bán của phim</h1>
+                                </div>
+                                <div className='revenuemv'>
+                                    <p><input type="text" placeholder='nhập tên phim' className='revenue-name' /></p>
+                                    <p><input type="text" placeholder='nhập địa chỉ rạp' className='revenue-addr'/></p>
+                                    <div className='rev-btn'>
+                                        <input type="button" value="Submit" className='revenue-btn' />
+                                    </div>
+                                </div>
+                                <div className="revenue-show">
+                                    <ul>
+                                        <li>
+                                            <span>Tổng số vé đã bán : 1000</span>
+                                        </li>
+                                        <li>
+                                            <span>Các chỗ ngồi đã bán : </span>
+                                        </li>
+                                        <li>
+                                            <span>Tổng doanh thu : 10000</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         
@@ -347,6 +419,17 @@ const Account = () => {
                 </div>
             </div>
         </div>
+        ) : (
+            <div className="container-account">
+                <div className="account">
+                    <div className='togetacc'>
+                        <span>Bạn đã có tài khoản hoặc chưa có tài khoản?</span><br/>
+                        <span>Đã có tài khoản click <Link to="/login">here</Link> để tới trang đăng nhập .</span><br/>
+                        <span>Chưa có tài khoản click <Link to="/login">here</Link> để tới trang đăng kí .</span>
+                    </div>
+                </div>
+            </div>
+        )}
         <Footer/>
     </div>
   )
