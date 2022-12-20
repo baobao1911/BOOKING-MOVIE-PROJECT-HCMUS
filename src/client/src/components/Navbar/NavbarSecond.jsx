@@ -6,17 +6,18 @@ import { AuthContext } from "../../context/AuthContext";
 
 const NavbarSecond = () => {
 	return (
-		<div className="navbar">
-			<div className="navContainer">
-				<Link
+		<div className="navbar-container">
+			<div className="navbar">
+			<Link
 					to="/"
 					style={{ color: "inherit", textDecoration: "none" }}
 				>
+					{/* <span className="logo">Fox Cinema</span> */}
 					<img
 						src={process.env.PUBLIC_URL + "/icon.png"}
 						alt="Logo"
-						width="150px"
-						class="logo"
+						width="200px"
+						className="logo"
 					/>
 				</Link>
 			</div>
