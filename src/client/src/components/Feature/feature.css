@@ -1,9 +1,10 @@
 .feature{
     min-height: 500px;
     width: 100%;
-    background-color: #444451;
+    background-color: #1E1E1E;
     display: flex;
     justify-content: center;
+    
     border-bottom: 1px solid white;
 }
 .feature-container{

@@ -1,10 +1,15 @@
 const Payment = require("../models/Payment.js");
-// const fetch = require("node-fetch");
+const dotenv = require("dotenv");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const { v4 } = require('uuid');
 const { createHmac } = require('crypto');
 const { createError } = require("../utils/error.js");
-const { MOMO_PARTNER_CODE, MOMO_ACCESS_KEY, MOMO_SECRET_KEY } = process.env;
+
+dotenv.config();
+
+const MOMO_PARTNER_CODE = process.env.MOMO_PARTNER_CODE;
+const MOMO_ACCESS_KEY = process.env.MOMO_ACCESS_KEY;
+const MOMO_SECRET_KEY = process.env.MOMO_SECRET_KEY;
 
 
 // Pay a payment
@@ -20,8 +25,8 @@ const payPayment = async (req, res, next) => {
 			orderId: id,
 			orderInfo: newPayment.payment_info,
 			redirectUrl:
-				"https://nasty-zebras-hug-113-185-78-20.loca.lt/callback",
-			ipnUrl: "https://nasty-zebras-hug-113-185-78-20.loca.lt/ipn",
+				"http://localhost:8000/api/payments/callback",
+			ipnUrl: "http://localhost:8000/api/payments/ipn",
 			requestType: "captureWallet",
 			extraData: "",
 			lang: "vi",
@@ -44,7 +49,6 @@ const payPayment = async (req, res, next) => {
 			res.status(200).json(json);
 		})
 	} catch (err) {
-        // next(createError(500, err));
 		next(err);
     }
 };

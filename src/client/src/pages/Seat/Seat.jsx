@@ -103,8 +103,8 @@ const Seat = () => {
     {loading ? (
       console.log("loading api")
     ) : (
-      <div className="movie-container"  >
-        <label htmlFor="moviename">{data.name}</label>
+      <div className="seat-movie-container"  >
+        <label htmlFor="seat-moviename">{data.name}</label>
         
         <ul className="showcase">
           <li>

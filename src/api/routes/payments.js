@@ -1,9 +1,15 @@
 const express = require("express");
-
+const dotenv = require("dotenv");
 const { payPayment } = require("../controllers/payment");
-const { verifyAdmin, verifyUser } = require("../utils/verify.js");
+const { verifyUser } = require("../utils/verify.js");
+const { createHmac } = require('crypto');
 const { createError } = require("../utils/error");
 const router = express.Router();
+
+dotenv.config();
+
+const MOMO_ACCESS_KEY = process.env.MOMO_ACCESS_KEY;
+const MOMO_SECRET_KEY = process.env.MOMO_SECRET_KEY;
 
 // Check MOMO test app
 router.get("/", (req, res) => {
@@ -22,7 +28,7 @@ function verifySignature(data) {
 	}
 }
 
-// Return data
+// Return callback
 router.get("/callback", (req, res, next) => {
 	try {
 		const data = req.query;
@@ -31,14 +37,14 @@ router.get("/callback", (req, res, next) => {
 		res.json(data);
 	} catch (err) {
 		if (err.message === "Momo signature is invalid") {
-			next(createError(err));
+			next(createError(404, err));
 		} else {
 			next(err);
 		}
 	}
 });
 
-//
+// Save IPN
 router.post("/ipn", (req, res, next) => {
 	try {
 		const data = req.body;
@@ -47,7 +53,7 @@ router.post("/ipn", (req, res, next) => {
 		res.json(data);
 	} catch (err) {
 		if (err.message === "Momo signature is invalid") {
-			next(createError(err));
+			next(createError(404, err));
 		} else {
 			next(err);
 		}

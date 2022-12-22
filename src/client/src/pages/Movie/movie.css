@@ -1,36 +1,33 @@
-/* .movieshowing{
+.movieshowing{
     width: 100%;
 }
 .feature{
     width: 100%;
-    background-color: lightgray;
-    border-bottom: 1px solid #000;
+    background-color: black;
 }
 .mscontainer{
     width: 100%;
-    background-color: cadetblue;
     margin: auto;
 }
 
 .mstitle{
     height: 50px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
     overflow: hidden; 
     text-align: left;
 }
 .mstitle span{
-    color: #000;
+    color: #fff;
     font-size: 27px;
     font-weight: 500;
     display: inline-block;
-    margin: 10px 10px 0 50px;
-    padding: 5px 6px
+    margin-left: 60px;
+    padding: 5px 5px
 }
 .listcard{
-    margin-top: 10px;
+    margin: 10px auto;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     width: 90%;
-    margin: 0 auto;
-} */
+}
