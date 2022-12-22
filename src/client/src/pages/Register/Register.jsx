@@ -4,29 +4,34 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import NavbarSecond from "../../components/Navbar/NavbarSecond";
 import Header from "../../components/Header/Header";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => {
-	const [firstName, setFirstName] = useState(undefined);
-	const [lastName, setLastName] = useState(undefined);
-	const [username, setusername] = useState(undefined);
-	const [email, setEmail] = useState(undefined);
-	const [password, setPassword] = useState(undefined);
-	const [confirmPwd, setConfirmPwd] = useState(undefined);
-
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [username, setusername] = useState("");
+	const [phone, setPhone] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPwd, setConfirmPwd] = useState("");
 	const [success, setSuccess] = useState(false);
+
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			console.log({ firstName, lastName, username, email, password });
-			const res = await axios.post(
-				"http://localhost:8000/api/auth/register",
-				{ firstName, lastName, username, email, password }
-			);
-			console.log(res);
-			setSuccess(true);
-		} catch (err) {
-			console.log({ firstName, lastName, username, email, password });
+		if (password == confirmPwd){
+			e.preventDefault();
+			try {
+				const res = await axios.post(
+					"http://localhost:8000/api/auth/register",
+					{ firstName, lastName, username, email,phone, password }
+				);
+				console.log(res)
+				setSuccess(true);
+			} catch (err) {
+				console.log({ firstName, lastName, username, email,phone, password });
+			}
 		}
+
 	};
 	return (
 		<div>
@@ -43,7 +48,7 @@ const Register = () => {
 					<Header />
 					<div className="sign-up-form">
 						<h2 className="Title">Sign Up</h2>
-						<form>
+						<form >
 							<p></p>
 							<input
 								type="text"
@@ -72,13 +77,21 @@ const Register = () => {
 								className="form-control"
 							/>
 							<p></p>
-							<input
-								type="email"
-								id="email"
-								name="email"
-								onChange={(e) => setEmail(e.target.value)}
+							<input type="email" name="email" ng-model="email" onChange={(e) => setEmail(e.target.value)}
 								placeholder="Email"
+								className="form-control" />
+								{email.match("/^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/") ? (console.log("match")):(
+									console.log("notmatch")
+								)}
+							<p></p>
+							<input
+								type="tel"
+								id="tel"
+								name="email"
+								onChange={(e) => setPhone(e.target.value)}
+								placeholder="Phone"
 								className="form-control"
+								pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
 							/>
 							<p></p>
 							<input
@@ -98,10 +111,12 @@ const Register = () => {
 								placeholder="Confirm password"
 								className="form-control"
 							/>
+							
+							{(confirmPwd.length > 1 & password.length > 6 &  password === confirmPwd) ? (<FontAwesomeIcon icon={faCheck} />):(
+								<span className="checkpass"> Mật khẩu không trùng khớp</span>
+							)}
 							<p></p>
-							<button onClick={handleSubmit} className="btn btn-primary">
-								Submit
-							</button>
+							<input type="submit" value="Submit" onClick={handleSubmit} className="btn btn-primary"/>
 						</form>
 					</div>
 				</div>
