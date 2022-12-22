@@ -8,3 +8,9 @@
 	justify-content: center;
 	margin: 3rem;
 }
+.checkpass{
+	text-align: left;
+	color: red;
+	margin-top: 15px;
+	font-size: 11px;
+}
