@@ -1,7 +1,8 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 .contentt{
-    background-color:#FFFFFF;
+    background-color: #1E1E1E;;
+
 }
 
 
@@ -15,84 +16,79 @@
 
 .Img{
     width: 220px;
-    height: 300px;
-    background-color: whitesmoke;
+    height: 350px;
     margin: 20px;
     display:flex;
-    justify-content:center; /* horizontally center
+    justify-content:center; 
     align-items:center;
-    border-style: outset;
+    
 }
 .Img-movie {
     width: 95%;
     height: 95%;
     border-radius: 8px;
-    border: 2px solid black;
+    border: 2px solid #FFFFFB;
 }
 .simpleinfor{
     display: flex;
 }
 
 .movie-title{
-    border-bottom: 1px solid black;
+
+    border-bottom: 1px solid #FFFFFB;
 }
 .information{
     display: grid;
     grid-row: auto;
-    margin: 20px 0px 10px 10px;
+    margin: 10px 0px 10px 10px;
     height: 450px;
     width: 75.8%;
+    color:#FFFFFB
 }
 .information .movie-name{
     font-size: 40px;
-    margin: 10px;
 }
 
-.movie-infor label{
-    font-family: Verdana, Arial, sans-serif;
-    color: #222;
-    font-size: 18px;
-    line-height: 23px;
-    font-weight: bold;
-    width: 15%;
-}
 
 .movie-detail-fb-booking{
     justify-content: flex-end;
     align-items: flex-end;
 }
 .booking-ticket{
-    border-radius: 20px;
+    border-radius: 40px;
     width: 20%;
     margin-bottom: 20px;
-    background-color: 	lightgray;
+    background-color: #CD2626;
     height: 45px;
     font-size: 20px;
-    text-align: center;
+    /* text-align: center; */
+    color:#FFFFFB
 }
 .booking-ticket:hover{
     transform: translate3d(2px,2px,3rem);
 }
 .trailermovie{
-    margin-bottom: 20px;
+    margin-top: 50px;
+   
+   
 }
+
+
 .std{
-    display: block;
+   
     font-family: Verdana, Arial, sans-serif;
-    color: #222;
+    color: #FFFFFB;
     font-size: 16px;
     line-height: 24px;
 }
-.details .std{
-    text-align: center;
-    margin: 20px;
-    
+
+.deepinfor {
+    margin-left: 7cm;
+
 }
+
 .details-title{
-    text-align: center;
-    display: block;
-    font-family: Verdana, Arial, sans-serif;
-    color: #222;
+    width: 20%;
     font-size: 20px;
-    line-height: 18px;
-} */
+    color:#FFFFFB;
+}  

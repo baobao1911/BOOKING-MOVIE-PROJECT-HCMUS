@@ -6,7 +6,7 @@
 
 /* @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"); */
 
-.movie-container {
+.seat-movie-container {
 	font-family: "Montserrat", sans-serif;
 	min-height: 100vh;
 	display: flex;
@@ -23,7 +23,7 @@
   box-sizing: border-box;
 }
 
-.movie-container {
+.seat-movie-container {
   margin: 20px 0px;
   display: flex;
   justify-content: center;
@@ -31,7 +31,7 @@
   flex-direction: column
 }
 
-.movie-container select {
+.seat-movie-container select {
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
