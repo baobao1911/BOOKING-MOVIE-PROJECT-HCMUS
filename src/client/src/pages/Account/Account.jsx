@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { AuthContext } from '../../context/AuthContext'
 import './account.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRankingStar } from '@fortawesome/free-solid-svg-icons'
+import useFetch from '../../hooks/useFetch'
 const Account = () => {
     const [page,setPage] = useState("1")
     const [avatar,setAvatar] = useState("https://www.redditstatic.com/avatars/avatar_default_01_A5A4A4.png")
@@ -17,7 +18,10 @@ const Account = () => {
         setPage(e)
     }
     const {user } = useContext(AuthContext)
-    const navigate = useNavigate()
+    const { data, loading, error } =  useFetch(`http://localhost:8000/api/users/${user._id}`)
+
+
+    
     // ==================== function =====================
     function handleSubmidaddmv(e){
         var checkbox = document.getElementsByID("btn1-admin")
@@ -38,7 +42,8 @@ const Account = () => {
           }
     }
     //====================================================
-    console.log(user)
+    console.log(user._id)
+    console.log(data)
     return (
     
     <div className='account-main'>
@@ -51,9 +56,9 @@ const Account = () => {
                 <div className="select-page-account">
                     <select value={page} onChange={e => setPage(e.target.value)} className="page">
                         <option value="1">Thông tin chung</option>
-                        <option value="2">Thông tin chi tiết</option>
-                        <option value="3">Lịch sử mua vé</option>
-                        <option value="4">Adminpage</option>
+                        (<option value="2">Thông tin chi tiết</option>
+                        {data.isAdmin === false &&  (<option value="3">Lịch sử mua vé</option>)}
+                        {data.isAdmin === true && (<option value="4">Adminpage</option>)}
                     </select>
                 </div>
 
@@ -123,8 +128,8 @@ const Account = () => {
                     ):(
                         console.log("cc")
                     )}
-                    
-                    {page === "2" ? (
+
+                    {( page === "2" ? (
                         <div className="account-detail">
                             <div className="my-account">
                                 <div className="page-title">
@@ -297,17 +302,17 @@ const Account = () => {
                         </div>
                     ):(
                         console.log("cc")
-                    )}
+                    ))}
 
-                    {page === "3" ? (
+                    { page === "3" ? (
                         <div className="page3">
-                            
+                            lich su mua ve
                         </div>
                     ):(
                         console.log("cc")
                     )}
 
-                    {page=== "4"?(
+                    {( page=== "4"?(
                         <div className="account-detail">
                             <div className="my-account">
                                 <div className="page-title">
@@ -415,7 +420,7 @@ const Account = () => {
                         
                     ):(
                         console.log("cc")
-                    )}
+                    ))}
                 </div>
             </div>
         </div>
