@@ -1,23 +1,21 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
 
-.movie-content{
+ .movie-content{
     margin-top: 5px;
-    width: 245px;
-    margin-bottom: 20px;
+    width: 280px;
+    margin-bottom: 100px;
     background-color: lightslategray;
     border: 2px solid lightgray;
     border-radius: 20px;
-    height: 470px;
+    height: 400px;
 }
-
 
 .Img-card{
     width: 100%;
-    height: 340px;
+    height: 300px;
     cursor: pointer;
     border-radius: 20px;
 }
-
 .box-text{
     display: grid;
     gap: 10px;
@@ -27,29 +25,34 @@
     text-align: center;
     text-decoration: none;
     height: 25px;
-    color: #333;
+    color: black;
     font-family: 'Open Sans', sans-serif;
-    font-size: 23px;
+    font-size: 15px;
+    font-weight: 600;
+
 }
 .container-mvtype{
     overflow: hidden; 
     text-align: center;
+    font-size: 13px;
 }
 .button-mvc{
+    margin-top: 30px;
     overflow: hidden; 
     text-align: center;
 }
 .btn-play{
-    background: #E0FF30;
-    color: #333;
+    background: #CD2626;
+    color: #fff;
     font-size: 18px;
-    font-weight: 540;
-    display: inline-block;
-    margin: 3px 0 3px 0;
-    padding: 5px 10px;
+    margin: 5px 0 5px 0;
+    padding: 10px 10px;
     border-radius: 20px;
     text-decoration: none;
+    display: inline-block;
+    transition: 1s;
 }
 .btn-play:hover{
-    transform: translateY(-3px);
-} */
+    background: yellow;
+    color:black
+}

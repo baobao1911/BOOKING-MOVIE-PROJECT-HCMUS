@@ -5,7 +5,6 @@ import "./movieCard.css";
 
 const MovieCard = ({ item }) => {
 	const [datapass, setDataPass] = useState([]);
-
 	const navigate = useNavigate();
 
 	const handleClickImg = async (e) => {
@@ -28,9 +27,8 @@ const MovieCard = ({ item }) => {
 				<div className="movie-box">
 					<Link to={`/movie/${item._id}`} className="movie-box-img">
 						<img
-							src={item.photos}
+							src="https://i.imgur.com/zo0ttHU.jpg"
 							alt=""
-							title="phim hayvl"
 							className="Img-card"
 						/>
 					</Link>
@@ -38,7 +36,7 @@ const MovieCard = ({ item }) => {
 						<Link
 							to={`/movie/${item._id}`}
 							className="title-movie"
-							title="phim hayvl"
+						
 						>
 							{item.name}
 						</Link>
