@@ -4,14 +4,14 @@
 }
 .container-account{
     width: 100%;
-    background-color: lightblue;
+    background-color: rgb(172, 235, 240);
     display: flex;
     justify-content: center;
 }
 .account{
     height: 100%;
     width: 70%;
-    background-color: rgb(184, 171, 153);
+    background-color: rgb(172, 235, 240);
     color: black;
     display: flex;
     justify-content: start;
@@ -23,7 +23,7 @@
 
 .page{
     height: 50px;
-    background-color: #d766d7;
+    background-color: white;
     border-radius: 5px;
     width: 90%;
 }
@@ -42,7 +42,7 @@
     margin-top: 10px;
 }
 .account .image-profile{
-    background-color: rgb(156, 225, 202);
+    background-color: rgb(44, 121, 156);
     border: 2px solid black;
 }
 .account .avatar{

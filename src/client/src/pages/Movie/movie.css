@@ -1,9 +1,10 @@
 .movieshowing{
     width: 100%;
+    background-color: white;
 }
 .feature{
     width: 100%;
-    background-color: black;
+    background: white;
 }
 .mscontainer{
     width: 100%;
@@ -17,7 +18,7 @@
     text-align: left;
 }
 .mstitle span{
-    color: #fff;
+    color: white;
     font-size: 27px;
     font-weight: 500;
     display: inline-block;
@@ -30,4 +31,5 @@
     justify-content: space-between;
     flex-wrap: wrap;
     width: 90%;
+    
 }
