@@ -1,7 +1,7 @@
 import "./register.css";
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavbarSecond from "../../components/Navbar/NavbarSecond";
 import Header from "../../components/Header/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,22 +17,36 @@ const Register = () => {
 	const [confirmPwd, setConfirmPwd] = useState("");
 	const [success, setSuccess] = useState(false);
 
+	const [notification,setNoti] = useState("")
+	const navigate = useNavigate()
+
+
 	const handleSubmit = async (e) => {
+		
 		if (password == confirmPwd){
 			e.preventDefault();
-			try {
-				const res = await axios.post(
-					"http://localhost:8000/api/auth/register",
-					{ firstName, lastName, username, email,phone, password }
-				);
-				console.log(res)
-				setSuccess(true);
-			} catch (err) {
-				console.log({ firstName, lastName, username, email,phone, password });
+			if (firstName.length < 1 || lastName.length  < 1 || username.length  < 1 || phone.length < 1){
+				setNoti("Không được để trống")
+				console.log(notification)
+			}else {
+				try {
+					const res = await axios.post(
+						"http://localhost:8000/api/auth/register",
+						{ firstName, lastName, username, email,phone, password }
+					);
+					console.log(res)
+					setSuccess(true);
+					navigate("/login")
+				} catch (err) {
+					console.log({ firstName, lastName, username, email,phone, password });
+				}
 			}
 		}
+		
 
 	};
+
+
 	return (
 		<div>
 			{success ? (
@@ -57,6 +71,7 @@ const Register = () => {
 								onChange={(e) => setFirstName(e.target.value)}
 								placeholder="First Name"
 								className="form-control"
+								pattern="[a-zA-Z0-9]"
 							/>
 							<p></p>
 							<input
@@ -80,18 +95,14 @@ const Register = () => {
 							<input type="email" name="email" ng-model="email" onChange={(e) => setEmail(e.target.value)}
 								placeholder="Email"
 								className="form-control" />
-								{email.match("/^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/") ? (console.log("match")):(
-									console.log("notmatch")
-								)}
 							<p></p>
 							<input
 								type="tel"
 								id="tel"
-								name="email"
+								name="phone"
 								onChange={(e) => setPhone(e.target.value)}
 								placeholder="Phone"
 								className="form-control"
-								pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
 							/>
 							<p></p>
 							<input
@@ -103,6 +114,7 @@ const Register = () => {
 								className="form-control"
 							/>
 							<p></p>
+
 							<input
 								type="password"
 								id="confirm-password"
@@ -112,9 +124,11 @@ const Register = () => {
 								className="form-control"
 							/>
 							
-							{(confirmPwd.length > 1 & password.length > 6 &  password === confirmPwd) ? (<FontAwesomeIcon icon={faCheck} />):(
+							{confirmPwd.length > 1 &&   (password === confirmPwd ? (<FontAwesomeIcon className="iconn" icon={faCheck} />):(
 								<span className="checkpass"> Mật khẩu không trùng khớp</span>
-							)}
+							))}
+							{notification != "" && <span className="checkpass"> {notification}</span>}
+							
 							<p></p>
 							<input type="submit" value="Submit" onClick={handleSubmit} className="btn btn-primary"/>
 						</form>
