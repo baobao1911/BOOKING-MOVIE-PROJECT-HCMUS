@@ -27,7 +27,7 @@ const MovieCard = ({ item }) => {
 				<div className="movie-box">
 					<Link to={`/movie/${item._id}`} className="movie-box-img">
 						<img
-							src="https://i.imgur.com/zo0ttHU.jpg"
+							src={item.photos}
 							alt=""
 							className="Img-card"
 						/>

@@ -1,33 +1,52 @@
 import "./register.css";
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavbarSecond from "../../components/Navbar/NavbarSecond";
 import Header from "../../components/Header/Header";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => {
-	const [firstName, setFirstName] = useState(undefined);
-	const [lastName, setLastName] = useState(undefined);
-	const [username, setusername] = useState(undefined);
-	const [email, setEmail] = useState(undefined);
-	const [password, setPassword] = useState(undefined);
-	const [confirmPwd, setConfirmPwd] = useState(undefined);
-
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [username, setusername] = useState("");
+	const [phone, setPhone] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPwd, setConfirmPwd] = useState("");
 	const [success, setSuccess] = useState(false);
+
+	const [notification,setNoti] = useState("")
+	const navigate = useNavigate()
+
+
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			console.log({ firstName, lastName, username, email, password });
-			const res = await axios.post(
-				"http://localhost:8000/api/auth/register",
-				{ firstName, lastName, username, email, password }
-			);
-			console.log(res);
-			setSuccess(true);
-		} catch (err) {
-			console.log({ firstName, lastName, username, email, password });
+		
+		if (password == confirmPwd){
+			e.preventDefault();
+			if (firstName.length < 1 || lastName.length  < 1 || username.length  < 1 || phone.length < 1){
+				setNoti("Không được để trống")
+				console.log(notification)
+			}else {
+				try {
+					const res = await axios.post(
+						"http://localhost:8000/api/auth/register",
+						{ firstName, lastName, username, email,phone, password }
+					);
+					console.log(res)
+					setSuccess(true);
+					navigate("/login")
+				} catch (err) {
+					console.log({ firstName, lastName, username, email,phone, password });
+				}
+			}
 		}
+		
+
 	};
+
+
 	return (
 		<div>
 			{success ? (
@@ -43,7 +62,7 @@ const Register = () => {
 					<Header />
 					<div className="sign-up-form">
 						<h2 className="Title">Sign Up</h2>
-						<form>
+						<form >
 							<p></p>
 							<input
 								type="text"
@@ -52,6 +71,7 @@ const Register = () => {
 								onChange={(e) => setFirstName(e.target.value)}
 								placeholder="First Name"
 								className="form-control"
+								pattern="[a-zA-Z0-9]"
 							/>
 							<p></p>
 							<input
@@ -72,12 +92,16 @@ const Register = () => {
 								className="form-control"
 							/>
 							<p></p>
-							<input
-								type="email"
-								id="email"
-								name="email"
-								onChange={(e) => setEmail(e.target.value)}
+							<input type="email" name="email" ng-model="email" onChange={(e) => setEmail(e.target.value)}
 								placeholder="Email"
+								className="form-control" />
+							<p></p>
+							<input
+								type="tel"
+								id="tel"
+								name="phone"
+								onChange={(e) => setPhone(e.target.value)}
+								placeholder="Phone"
 								className="form-control"
 							/>
 							<p></p>
@@ -90,6 +114,7 @@ const Register = () => {
 								className="form-control"
 							/>
 							<p></p>
+
 							<input
 								type="password"
 								id="confirm-password"
@@ -98,10 +123,14 @@ const Register = () => {
 								placeholder="Confirm password"
 								className="form-control"
 							/>
+							
+							{confirmPwd.length > 1 &&   (password === confirmPwd ? (<FontAwesomeIcon className="iconn" icon={faCheck} />):(
+								<span className="checkpass"> Mật khẩu không trùng khớp</span>
+							))}
+							{notification != "" && <span className="checkpass"> {notification}</span>}
+							
 							<p></p>
-							<button onClick={handleSubmit} className="btn btn-primary">
-								Submit
-							</button>
+							<input type="submit" value="Submit" onClick={handleSubmit} className="btn btn-primary"/>
 						</form>
 					</div>
 				</div>
