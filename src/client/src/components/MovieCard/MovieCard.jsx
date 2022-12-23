@@ -27,7 +27,7 @@ const MovieCard = ({ item }) => {
 				<div className="movie-box">
 					<Link to={`/movie/${item._id}`} className="movie-box-img">
 						<img
-							src="https://i.imgur.com/zo0ttHU.jpg"
+							src={item.photos}
 							alt=""
 							className="Img-card"
 						/>
@@ -45,6 +45,18 @@ const MovieCard = ({ item }) => {
 							<span className="movie-type">
 								{item.categories}
 							</span>
+						</div>
+						
+						<div className="container-start-time">
+							<div className="start-time">
+								<span>20/10/2022 - Saturday</span>
+							</div>
+						</div>
+						
+						<div className="container-rating">
+							<div className="rating">
+							<span>Rating: 3.5</span>
+							</div>
 						</div>
 
 						<div className="button-mvc">
