@@ -12,7 +12,7 @@ const { verifyAdmin, verifyUser } = require("../utils/verify.js");
 const router = express.Router();
 
 // Create ticket
-router.post("/:id/:movie_id", verifyUser, createTicket);
+router.post("/:id/:movie_id", createTicket);
 
 // Update ticket
 router.put("/:id", verifyAdmin, updateTicket);
