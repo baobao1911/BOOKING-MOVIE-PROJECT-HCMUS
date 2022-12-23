@@ -46,6 +46,18 @@ const MovieCard = ({ item }) => {
 								{item.categories}
 							</span>
 						</div>
+						
+						<div className="container-start-time">
+							<div className="start-time">
+								<span>20/10/2022 - Saturday</span>
+							</div>
+						</div>
+						
+						<div className="container-rating">
+							<div className="rating">
+							<span>Rating: 3.5</span>
+							</div>
+						</div>
 
 						<div className="button-mvc">
 							<Link className="btn-play" to={`/seat/${item._id}`}>Buy Tickets</Link>
