@@ -12,13 +12,13 @@ const { verifyAdmin } = require("../utils/verify.js");
 const router = express.Router();
 
 // Create a new movie
-router.post("/", verifyAdmin, createMovie);
+router.post("/", createMovie);
 
 // Update a movie
 router.put("/:id", verifyAdmin, updateMovie);
 
 // Delete a movie
-router.delete("/:id", verifyAdmin, deleteMovie);
+router.delete("/:id", deleteMovie);
 
 // Get a movie
 router.get("/find/:id", getMovie);

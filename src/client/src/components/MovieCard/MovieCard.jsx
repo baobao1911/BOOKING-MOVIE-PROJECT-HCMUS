@@ -48,7 +48,7 @@ const MovieCard = ({ item }) => {
 						</div>
 
 						<div className="button-mvc">
-							<Link className="btn-play">Buy Tickets</Link>
+							<Link className="btn-play" to={`/seat/${item._id}`}>Buy Tickets</Link>
 						</div>
 					</div>
 				</div>

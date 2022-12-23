@@ -32,7 +32,7 @@ const Navbar = () => {
 							<input type="button" value="Logout" onClick={handleLogout}/>
 						</div>
 						<div className="logo-user">
-							<span>{user.username}</span>
+							<span>{user.details.username}</span>
 							<Link className="logo-link" to="/account"> 
 								<img  src="https://www.redditstatic.com/avatars/avatar_default_01_A5A4A4.png" alt="" />
 							</Link>

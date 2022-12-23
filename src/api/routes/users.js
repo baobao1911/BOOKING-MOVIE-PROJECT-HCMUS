@@ -10,13 +10,13 @@ const { verifyAdmin, verifyUser } = require("../utils/verify.js");
 const router = express.Router();
 
 // Update user information
-router.put("/:id", verifyAdmin, updateUser);
+router.put("/:id", updateUser);
 
 // Delete user information
 router.delete("/:id", verifyAdmin, deleteUser);
 
 // Get a user by id
-router.get("/:id", verifyUser, getUser);
+router.get("/:id", getUser);
 
 // Get all user
 router.get("/", verifyAdmin, getAllUsers);

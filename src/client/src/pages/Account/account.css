@@ -128,12 +128,15 @@
 .account .legend{
     text-align: center;
 }
-.account .btnpage2 , .account .btn2-delmv , .account .rev-btn{
+.account .btnpage2 , .account .btn2-delmv , .account .rev-btn , .account .btn-admin01{
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
 }
-.account .btnpage2 input, .account .btn2-delmv input , .account .rev-btn input{
+.account .checkbox-addmv{
+    text-align: center;
+}
+.account .btnpage2 input, .account .btn2-delmv input , .account .rev-btn input, .account .btn-admin01 input{
     height: 40px;
     width: 100px;
     border-radius: 30px;
@@ -144,4 +147,7 @@
 }
 .account .revenuemv p{
     display: inline-block;
+}
+.account .email{
+    border-bottom: 1px solid black;
 }
