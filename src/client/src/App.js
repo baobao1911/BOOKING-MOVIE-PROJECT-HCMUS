@@ -7,7 +7,6 @@ import Home from "./pages/Home/Home";
 import MovieContent from "./pages/MovieContent/MovieContent";
 import Seat from "./pages/Seat/Seat";
 import Account from "./pages/Account/Account";
-import Purchase from "./pages/Purchase/Purchase";
 
 function App() {
 	return (
