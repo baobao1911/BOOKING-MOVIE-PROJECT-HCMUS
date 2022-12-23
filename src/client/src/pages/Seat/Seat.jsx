@@ -1,8 +1,7 @@
 import useFetch from "../../hooks/useFetch"
 import "./seat.css"
 import React, {useContext, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { AuthContext } from '../../context/AuthContext'
 import axios from "axios";
@@ -24,9 +23,8 @@ const Seat = () => {
     const [seatbooking,setSeatbooking] = useState([])
     const [adrs,seatAdrs] = useState([])
     const [time,setTime] = useState([])
-    const [lseat,SetLseat] = useState([])
     const { user } = useContext(AuthContext)
-
+    const navigate = useNavigate()
     //==============================
     const [movie_id,setMvid] = useState("") 
     const [customer_id,setCsid] = useState("")
@@ -100,7 +98,7 @@ const Seat = () => {
           check = true
         }
       }
-      <Navigate to="/" />
+      navigate("/NothingPage", { replace: true });
       
     }
   //==================================================
