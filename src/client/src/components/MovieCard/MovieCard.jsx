@@ -1,26 +1,21 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import "./movieCard.css";
 
 const MovieCard = ({ item }) => {
-	const [datapass, setDataPass] = useState([]);
+    const { user } = useContext(AuthContext)
 	const navigate = useNavigate();
 
-	const handleClickImg = async (e) => {
-		e.preventDefault();
-		try {
-			const res = await axios.get(
-				"http://localhost:8000/api/movies/find/" + item._id
-			);
-			setDataPass(res.data);
-			console.log(item._id);
-
-			navigate(`/movie/${item._id}`, { state: item._id });
-		} catch (err) {
-			console.log(err);
+	const handleNavigate = async (e)=>{
+		if(user){
+			navigate(`/seat/${item._id}`, { replace: true });
+		}else{
+			navigate("/login", { replace: true });
 		}
-	};
+	}
 	return (
 		<section className="movie-container" key={item._id}>
 			<div className="movie-content">
@@ -60,7 +55,8 @@ const MovieCard = ({ item }) => {
 						</div>
 
 						<div className="button-mvc">
-							<Link className="btn-play" to={`/seat/${item._id}`}>Buy Tickets</Link>
+							<input type="button" value="Buy Tickets" className="btn-play"  onClick={handleNavigate}/>
+							{/* <Link className="btn-play" to={`/seat/${item._id}`}>Buy Tickets</Link> */}
 						</div>
 					</div>
 				</div>

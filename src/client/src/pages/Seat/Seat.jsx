@@ -1,7 +1,7 @@
 import useFetch from "../../hooks/useFetch"
 import "./seat.css"
 import React, {useContext, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { AuthContext } from '../../context/AuthContext'
 import axios from "axios";
@@ -23,10 +23,8 @@ const Seat = () => {
     const [seatbooking,setSeatbooking] = useState([])
     const [adrs,seatAdrs] = useState([])
     const [time,setTime] = useState([])
-    const [lseat,SetLseat] = useState([])
-
     const { user } = useContext(AuthContext)
-
+    const navigate = useNavigate()
     //==============================
     const [movie_id,setMvid] = useState("") 
     const [customer_id,setCsid] = useState("")
@@ -64,9 +62,8 @@ const Seat = () => {
       seatAdrs(data.address)
       setTime(data.dates)
 
-      setCsid(user._id)
+      setCsid(user.details._id)
       setMvid(id)
-      setSeatnumber(40)
     }
   
     useEffect(()=>{
@@ -88,31 +85,22 @@ const Seat = () => {
       return d.toLocaleString('es-us')
     }
 
-    const handlePayment = async (e) => {
+    const handlePayment = async (e) =>{
       e.preventDefault();
-      console.log(movie_id)
-      console.log(customer_id)
-      console.log(seat_number)
-      console.log(address)
-      console.log(date)
-
-
-      try {
-          const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,{'movie_id':movie_id,'customer_id':customer_id,'seat_number':seat_number,'address':address,'date':date});
+      let temp = ((listseat.textContent).split(",")).map(i=>Number(i));
+      var check = false
+      for (let i in temp){
+        try {
+          const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,{movie_id,customer_id,"seat_number":temp[i],address,date});
           console.log(res);
-      } catch (err) {
+        } catch (err) {
           console.log(err);
+          check = true
+        }
       }
-    }
+      navigate("/NothingPage", { replace: true });
       
-    // const handlePayment = (e) =>{
-    //   let temp = ((listseat.textContent).split(","))
-    //   temp.forEach((val) =>{
-    //     setSeatnumber(val)
-    //     handleCall(e)
-    //   })
-
-    // }
+    }
   //==================================================
   return (
     <section>
@@ -225,6 +213,7 @@ const Seat = () => {
             Your Seat : <span id="lseat">none</span>
           </p>
           <input type="button" value="payment" onClick={handlePayment}/>
+
         </div>
       </div>
       )}

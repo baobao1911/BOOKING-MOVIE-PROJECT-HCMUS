@@ -113,7 +113,9 @@ const Account = () => {
         }
     }
     const [delname,setDelname] = useState(undefined)
+
     const [delprocess,setDelprocess] = useState(false)
+
     const getNameDel = e =>{
         setDelname(e.target.value)
     }
@@ -129,6 +131,19 @@ const Account = () => {
             console.log(err)
         }
     }
+    const [revenuemv,setRevenuemv] = useState(undefined)
+    const [seatsold,setSeatsold] = useState(undefined)
+    const handleRevenue = async (e)=>{
+        e.preventDefault();
+        try {
+            const res = await axios.get(`http://localhost:8000/api/movies?name=${revenuemv}`)
+            setSeatsold((res.data[0].booked_seats).length)
+        } catch (err) {
+            console.log(err)
+        }
+        
+    }
+
     //====================================================
     return (
     
@@ -140,7 +155,7 @@ const Account = () => {
 
             <div className="account">
                 <div className="select-page-account">
-                    <select value={page} onChange={e => setPage(e.target.value)}   className="page">
+                    <select value={page} onChange={e => setPage(e.target.value)} className="page">
                         <option value="1">Thông tin chung</option>
                         <option value="2">Thông tin chi tiết</option>
                         {!user.isAdmin && (<option value="3">Lịch sử mua vé</option>)}
@@ -400,22 +415,20 @@ const Account = () => {
                                     <h1>Xem só ghế đã bán của phim</h1>
                                 </div>
                                 <div className='revenuemv'>
-                                    <p><input type="text" placeholder='nhập tên phim' className='revenue-name' /></p>
-                                    <p><input type="text" placeholder='nhập địa chỉ rạp' className='revenue-addr'/></p>
+                                    <p><input type="text" placeholder='nhập tên phim' onChange={e => setRevenuemv(e.target.value)} className='revenue-name' /></p>
+
                                     <div className='rev-btn'>
-                                        <input type="button" value="Submit" className='revenue-btn' />
+                                        <input type="button" value="Submit" className='revenue-btn'onClick={handleRevenue}/>
                                     </div>
                                 </div>
                                 <div className="revenue-show">
                                     <ul>
                                         <li>
-                                            <span>Tổng số vé đã bán : 1000</span>
+                                            <span>Tổng số vé đã bán : {seatsold}</span>
                                         </li>
+
                                         <li>
-                                            <span>Các chỗ ngồi đã bán : </span>
-                                        </li>
-                                        <li>
-                                            <span>Tổng doanh thu : 10000</span>
+                                            <span>Tổng doanh thu : {seatsold * 90000}</span>
                                         </li>
                                     </ul>
                                 </div>
