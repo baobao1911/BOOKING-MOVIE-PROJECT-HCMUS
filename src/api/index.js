@@ -8,7 +8,6 @@ const ticketsRoute = require("./routes/tickets.js");
 const paymentsRoute = require("./routes/payments.js");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-// const {swaggerDocs} = require("./utils/swagger");
 
 const app = express();
 dotenv.config();
@@ -51,5 +50,4 @@ app.use((err, req, res, next) => {
 app.listen(8000, () => {
 	connect();
 	console.log("Connected to backend.");
-	// swaggerDocs(app, 8000);
 });
