@@ -9,7 +9,6 @@ import "./feature.css";
 // import "swiper/css";
 // import "swiper/css/pagination";
 // import "swiper/css/navigation";
-import Slider from "react-slick"
 import HomeCard from "../../pages/Home/home1/HomeCard"
 import { homeData } from "../../data"
 const Feature = () => {

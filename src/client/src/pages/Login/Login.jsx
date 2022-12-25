@@ -34,8 +34,8 @@ const Login = () => {
 				"http://localhost:8000/api/auth/login",
 				credentials
 			);
-			console.log(res);
-			dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+			console.log(res.data.isAdmin);
+			dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
 			navigate("/");
 		} catch (err) {
 			console.log(err);

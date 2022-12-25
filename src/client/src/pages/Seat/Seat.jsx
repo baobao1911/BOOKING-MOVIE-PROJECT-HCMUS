@@ -1,7 +1,7 @@
 import useFetch from "../../hooks/useFetch"
 import "./seat.css"
 import React, {useContext, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { AuthContext } from '../../context/AuthContext'
 import axios from "axios";
@@ -17,23 +17,20 @@ const Seat = () => {
     const count = document.getElementById('count');
     const total = document.getElementById('total');
     const listseat = document.getElementById('lseat');
-    var seat = document.getElementsByClassName('seat')
-    seat = [...seat]
+    
 
 
     const [seatbooking,setSeatbooking] = useState([])
     const [adrs,seatAdrs] = useState([])
     const [time,setTime] = useState([])
-    const [lseat,SetLseat] = useState([])
-    
     const { user } = useContext(AuthContext)
-
+    const navigate = useNavigate()
     //==============================
-    const [movie_id,setMvid] = useState(undefined) 
-    const [customer_id,setCsid] = useState(undefined)
-    const [seat_number,setSeatnumber]  = useState(undefined)
-    const [address,setCinema] = useState('chọn rạp')
-    const [date,setGettime] = useState('chọn giờ chiếu')
+    const [movie_id,setMvid] = useState("") 
+    const [customer_id,setCsid] = useState("")
+    const [seat_number,setSeatnumber]  = useState("")
+    const [address,setAddress] = useState("none")
+    const [date,setDate] = useState(new Date())
 
     //==============================
     function updateSelectedCount() {
@@ -50,18 +47,29 @@ const Seat = () => {
     }
 
     function setupSeat () {
+      var seat = document.getElementsByClassName('seat')
+      seat = [...seat]
+
       setSeatbooking(data.booked_seats)
-      for (let i in seatbooking){
-        seat[seatbooking[i]+2].classList.toggle('occupied')
-        console.log(seatbooking[i])
+
+      if (seatbooking !== undefined && !loading){
+        console.log("========")
+        seatbooking.forEach((val)=>{
+          var idx = parseInt(val,10)  + 2
+          seat[idx].classList.toggle('occupied')
+        })
       }
       seatAdrs(data.address)
       setTime(data.dates)
+
+      setCsid(user.details._id)
+      setMvid(id)
     }
   
     useEffect(()=>{
+      
       setupSeat()
-      console.log("loa")
+      console.log("setup seat")
     },[data])
     
     const handleClick = e => {
@@ -77,23 +85,21 @@ const Seat = () => {
       return d.toLocaleString('es-us')
     }
 
-    // const handlePayment = async (e) => {
-    //   e.preventDefault();
-
-    //   if (user) {
-    //     setCsid(user._id)
-        
-    //     try {
-    //       const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,{movie_id,customer_id,seat_number,address,date});
-    //       console.log(res);
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    //   }
+    const handlePayment = async (e) =>{
+      e.preventDefault();
+      let temp = ((listseat.textContent).split(",")).map(i=>Number(i));
+      var check = false
+      for (let i in temp){
+        try {
+          const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,{movie_id,customer_id,"seat_number":temp[i],address,date});
+          console.log(res);
+        } catch (err) {
+          console.log(err);
+          check = true
+        }
+      }
+      navigate("/NothingPage", { replace: true });
       
-    // };
-    const handlePayment = ()=>{
-      console.log(typeof(listseat.textContent))
     }
   //==================================================
   return (
@@ -121,13 +127,15 @@ const Seat = () => {
           </li>    
         </ul>
 
-        <select value={address} onChange={e => setCinema(e.target.value)} className="address">
+        <select value={address} onChange={e => setAddress(e.target.value)} className="seat-address">
+          <option selected >Chọn rạp</option>
           {adrs && adrs.map ((item,idx) => (
             <option  key={idx} value={item}> {item}</option>
           ))}
         </select>
 
-        <select value={date} onChange={e=>setGettime(e.target.value)} className="time">
+        <select value={date} onChange={e=>setDate(e.target.value)} className="seat-time">
+          <option selected >Chọn giờ chiếu phim</option>
           {time && time.map ((item,idx) => (
             <option key={idx} value={item}> {setupTime(item)}</option>
           ))}
@@ -205,6 +213,7 @@ const Seat = () => {
             Your Seat : <span id="lseat">none</span>
           </p>
           <input type="button" value="payment" onClick={handlePayment}/>
+
         </div>
       </div>
       )}

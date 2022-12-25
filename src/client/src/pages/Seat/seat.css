@@ -24,11 +24,11 @@
 }
 
 .seat-movie-container {
-  margin: 20px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column
+  flex-direction: column;
+  border-bottom: 1px solid white;
 }
 
 .seat-movie-container select {
@@ -138,3 +138,7 @@ p.text span {
   color: #fff;
 }
 
+.seat-address ,.seat-time {
+  text-align: center;
+  width: max-content;
+}
