@@ -36,47 +36,45 @@ const Payment = () => {
       <div className='payment'>
         <div className='payment-conatiner'>
           <div className="page-title">
-            Thanh Toán
+            PAYMENT
           </div>
           <table className='h-table'>
-            {/* <tr>
-               
-                <td>Tên phim</td>
-                <td>Ngày xem</td>
-                <td>Địa chỉ</td>
-            </tr> */}
+            <tr>
+                <th >Id </th>
+                <th>Movie's name</th>
+                <th>Schedule</th>
+                <th>Address</th>
+            </tr>
             <tbody className='temp'>
               {
                 location.state.id.map((item,idx)=>{
                   return (
                     <tr key={idx}>
-                      <tr>
-                      <td >Mã vé: </td>
+                      
+                      {/* <td >Mã vé: </td> */}
                       <td>{item._id}</td>
-                      </tr>
-                      <tr>
-                      <td>Tên phim: </td>
+                     
+                      {/* <td>Tên phim: </td> */}
                       <td>{item.movie_name}</td>
-                      </tr>
-                      <tr>
-                      <td>Ngày xem: </td>
+                   
+                      {/* <td>Ngày xem: </td> */}
                       <td>{setupTime(item.date)}</td>
-                      </tr>
-                      <tr>
-                      <td>Địa chỉ: </td>
+                    
+                      {/* <td>Địa chỉ: </td> */}
                       <td>{item.address}</td>
-                      </tr>
-                      <tr>
-                      <td>Tổng Tiền: </td>
-                      <td>{location.state.id.length * 90000}</td>
-                    </tr>
+                   
+                     
                   </tr>
                   )
                 })
               }
-              
+             
+                     
+            
             </tbody>
           </table>
+          <h1>Total prices </h1>
+          <h2>{location.state.id.length * 90000}</h2>
           <button
 									onClick={handlePay}
 									className="pay"
