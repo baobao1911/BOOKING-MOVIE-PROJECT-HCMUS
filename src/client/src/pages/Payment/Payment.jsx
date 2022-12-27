@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
 import Navbar from '../../components/Navbar/Navbar'
+import './payment.css';
 
 const Payment = () => {
     const location = useLocation()
@@ -35,38 +36,53 @@ const Payment = () => {
       <div className='payment'>
         <div className='payment-conatiner'>
           <div className="page-title">
-            <h1>Thanh Toán</h1>
+            Thanh Toán
           </div>
           <table className='h-table'>
-            <tr>
-                <td>Mã vé</td>
+            {/* <tr>
+               
                 <td>Tên phim</td>
                 <td>Ngày xem</td>
                 <td>Địa chỉ</td>
-            </tr>
-            <tbody>
+            </tr> */}
+            <tbody className='temp'>
               {
                 location.state.id.map((item,idx)=>{
                   return (
                     <tr key={idx}>
+                      <tr>
+                      <td >Mã vé: </td>
                       <td>{item._id}</td>
+                      </tr>
+                      <tr>
+                      <td>Tên phim: </td>
                       <td>{item.movie_name}</td>
+                      </tr>
+                      <tr>
+                      <td>Ngày xem: </td>
                       <td>{setupTime(item.date)}</td>
+                      </tr>
+                      <tr>
+                      <td>Địa chỉ: </td>
                       <td>{item.address}</td>
+                      </tr>
+                      <tr>
+                      <td>Tổng Tiền: </td>
+                      <td>{location.state.id.length * 90000}</td>
+                    </tr>
                   </tr>
                   )
                 })
               }
-              <tr>
-                <td>Tổng Tiền</td>
-                <td>{location.state.id.length * 90000}</td>
-              </tr>
               
             </tbody>
           </table>
-          <div className='pay'>
-              <input type="button" value="Payment" onClick={handlePay}/>
-          </div>
+          <button
+									onClick={handlePay}
+									className="pay"
+								>
+									Payment
+								</button>
         </div>
       </div>
 
@@ -76,3 +92,5 @@ const Payment = () => {
 }
 
 export default Payment
+
+
