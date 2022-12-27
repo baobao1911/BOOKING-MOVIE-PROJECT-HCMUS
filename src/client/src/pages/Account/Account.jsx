@@ -143,6 +143,25 @@ const Account = () => {
         }
         
     }
+    const [historydata,setHistorydata] = useState()
+    async function loadHistory (){
+        try {
+            const res = await axios.get(`http://localhost:8000/api/tickets/users/${user.details._id}`)
+            setHistorydata(res.data)
+            console.log(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+    function setupTime(e){
+        var d = new Date(e)
+        return d.toLocaleString('es-us')
+      }
+    const handleChangePage = e =>{
+        setPage(e)
+        loadHistory()
+    }
 
     //====================================================
     return (
@@ -155,7 +174,7 @@ const Account = () => {
 
             <div className="account">
                 <div className="select-page-account">
-                    <select value={page} onChange={e => setPage(e.target.value)} className="page">
+                    <select value={page} onChange={e => handleChangePage(e.target.value)} className="page">
                         <option value="1">Thông tin chung</option>
                         <option value="2">Thông tin chi tiết</option>
                         {!user.isAdmin && (<option value="3">Lịch sử mua vé</option>)}
@@ -324,8 +343,32 @@ const Account = () => {
                     )}
 
                     { page === "3" && (
-                        <div className="page3">
-                            lich su mua ve
+                        <div className="account-detail">
+                            <div className="my-account">
+                                <div className="page-title">
+                                    <h1>Lịch sử xem phim</h1>
+                                </div>
+                                <table className='h-table'>
+                                    <tr>
+                                        <td>Mã vé</td>
+                                        <td>Tên phim</td>
+                                        <td>Ngày xem</td>
+                                        <td>Địa chỉ</td>
+                                    </tr>
+                                    <tbody>
+                                        {historydata && historydata.map((item,idx)=>{
+                                            return (
+                                                <tr key={idx}>
+                                                    <td>{item._id}</td>
+                                                    <td>{item.movie_name}</td>
+                                                    <td>{setupTime(item.date)}</td>
+                                                    <td>{item.address}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     )}
 

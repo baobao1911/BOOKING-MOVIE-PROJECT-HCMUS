@@ -20,7 +20,11 @@ const TicketSchema = new mongoose.Schema(
     date: {
       type: Date,
       required: true,
-    }
+    },
+    movie_name: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

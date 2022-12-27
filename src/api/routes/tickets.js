@@ -25,7 +25,7 @@ router.delete("/:movie_id", verifyAdmin, deleteTicket);
 router.get("/:id", verifyAdmin, getTicket);
 
 // Get all user's tickets
-router.get("/users/:id", verifyUser, getAllTicketsOfAnUser);
+router.get("/users/:id", getAllTicketsOfAnUser);
 
 // Get all movies's tickets
 router.get("/movies/:movie_id", verifyAdmin, getAllTicketsOfAMovie);
