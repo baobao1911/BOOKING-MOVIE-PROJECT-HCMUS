@@ -8,6 +8,7 @@ import MovieContent from "./pages/MovieContent/MovieContent";
 import Seat from "./pages/Seat/Seat";
 import Account from "./pages/Account/Account";
 import Something from "./pages/NothingPage/Something";
+import Payment from "./pages/Payment/Payment";
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 				<Route path="/seat/:_id" element={<Seat />} />
 				<Route path="/account" element={<Account />} />
 				<Route path="/NothingPage" element={<Something/>}/>
+				<Route path="/payment" element={<Payment/>}/>
 				{/* <Route path="/purchase" element={<Purchase />}/> */}
 			</Routes>
 		</BrowserRouter>

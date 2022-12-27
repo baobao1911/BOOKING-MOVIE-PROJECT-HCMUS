@@ -25,6 +25,6 @@ router.get("/callback/:id", checkTransactionStatus);
 router.post("/ipn", saveIpn);
 
 // Do transaction
-router.post("/pay/:id", verifyUser, payPayment);
+router.post("/pay/:id", payPayment);
 
 module.exports = router;

@@ -29,7 +29,6 @@ const Seat = () => {
     const [seat_number,setSeatnumber]  = useState("")
     const [address,setAddress] = useState("none")
     const [date,setDate] = useState(new Date())
-
     //==============================
     function updateSelectedCount() {
       const selectedSeats = document.querySelectorAll('.row .seat.selected');
@@ -51,7 +50,6 @@ const Seat = () => {
       setSeatbooking(data.booked_seats)
 
       if (seatbooking !== undefined && !loading){
-        console.log("========")
         seatbooking.forEach((val)=>{
           var idx = parseInt(val,10)  + 2
           seat[idx].classList.toggle('occupied')
@@ -65,9 +63,7 @@ const Seat = () => {
     }
   
     useEffect(()=>{
-      
       setupSeat()
-      console.log("setup seat")
     },[data])
     
     const handleClick = e => {
@@ -87,16 +83,25 @@ const Seat = () => {
       e.preventDefault();
       let temp = ((listseat.textContent).split(",")).map(i=>Number(i));
       var check = false
+      var arr = []
       for (let i in temp){
         try {
-          const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,{movie_id,customer_id,"seat_number":temp[i],address,date});
-          console.log(res);
+          console.log(movie_id)
+          console.log(customer_id)
+          console.log( temp[i])
+          console.log(address)
+          console.log(date)
+          console.log(data.name)
+          const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,
+                      {movie_id,customer_id,"seat_number":temp[i],address,date,"movie_name":data.name});
+          console.log(res.data);
+          arr.push(res.data)
         } catch (err) {
           console.log(err);
           check = true
         }
       }
-      navigate("/NothingPage", { replace: true });
+      navigate("/payment", {state :{id : arr , id_user: user.details._id} });
       
     }
   //==================================================
