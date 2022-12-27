@@ -11,7 +11,7 @@ dotenv.config();
 const MOMO_PARTNER_CODE = process.env.MOMO_PARTNER_CODE;
 const MOMO_ACCESS_KEY = process.env.MOMO_ACCESS_KEY;
 const MOMO_SECRET_KEY = process.env.MOMO_SECRET_KEY;
-const id = v4();
+
 
 
 function verifySignature(data) {
@@ -26,6 +26,7 @@ function verifySignature(data) {
 
 // Pay a payment
 const payPayment = async (req, res, next) => {
+	const id = req.params.id;
 	const newPayment = new Payment(req.body);
 	try {
 		const data = {
@@ -46,7 +47,6 @@ const payPayment = async (req, res, next) => {
 			.update(message)
 			.digest("hex");
 
-		console.log(data.signature);
 
 		fetch("https://test-payment.momo.vn/v2/gateway/api/create", {
 			method: "POST",
@@ -64,6 +64,7 @@ const payPayment = async (req, res, next) => {
 };
 
 const checkTransactionStatus = async (req, res, next) => {
+	const id = req.params.id;
 	const newPayment = new Payment(req.body);
 	console.log(newPayment);
 	try {
@@ -92,7 +93,6 @@ const checkTransactionStatus = async (req, res, next) => {
 			.update(message)
 			.digest("hex");
 
-		console.log(newData.signature);
 
 		fetch("https://test-payment.momo.vn/v2/gateway/api/query", {
 			method: "POST",

@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 });
 
 // Return callback
-router.get("/callback", checkTransactionStatus);
+router.get("/callback/:id", checkTransactionStatus);
 
 // Save IPN
 router.post("/ipn", saveIpn);

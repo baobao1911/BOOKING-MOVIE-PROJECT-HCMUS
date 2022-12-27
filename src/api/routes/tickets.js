@@ -6,6 +6,7 @@ const {
 	getTicket,
 	getAllTicketsOfAnUser,
 	getAllTicketsOfAMovie,
+	getAllTickets,
 } = require("../controllers/tickets.js");
 const { verifyAdmin, verifyUser } = require("../utils/verify.js");
 
@@ -28,5 +29,8 @@ router.get("/users/:id", verifyUser, getAllTicketsOfAnUser);
 
 // Get all movies's tickets
 router.get("/movies/:movie_id", verifyAdmin, getAllTicketsOfAMovie);
+
+// Get all tickets
+router.get("/", getAllTickets);
 
 module.exports = router;

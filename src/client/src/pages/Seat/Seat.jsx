@@ -18,8 +18,6 @@ const Seat = () => {
     const total = document.getElementById('total');
     const listseat = document.getElementById('lseat');
     
-
-
     const [seatbooking,setSeatbooking] = useState([])
     const [adrs,seatAdrs] = useState([])
     const [time,setTime] = useState([])

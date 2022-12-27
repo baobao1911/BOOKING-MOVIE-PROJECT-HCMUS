@@ -11,6 +11,9 @@ const createTicket = async (req, res, next) => {
 
 	try {
 		const movie = await Movie.findById(movieId);
+		if (movie === null) {
+			throw new Error("Movie is not exist");
+		}
 		if (movie.booked_seats.indexOf(newTicket.seat_number) >= 0) {
 			throw new Error("Invalid seat");
 		}
@@ -94,9 +97,9 @@ const getAllTicketsOfAMovie = async (req, res, next) => {
 
 // Get all tickets of an user
 const getAllTicketsOfAnUser = async (req, res, next) => {
-	const userId = req.params.user_id;
+	const userId = req.params.id;
 	try {
-		const allTickets = await Ticket.find({ user_id: userId }).limit(
+		const allTickets = await Ticket.find({ customer_id: userId }).limit(
 			req.query.limit
 		);
 		res.status(200).json(allTickets);
