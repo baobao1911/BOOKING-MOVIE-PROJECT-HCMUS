@@ -48,3 +48,19 @@
 	background-color: lightyellow;
 	transform: translateX(-1px);
 }
+.header .search-item{
+	text-align: center;
+	cursor: pointer;
+}
+.header .ul-search{
+	list-style: none;
+	margin-right: 90px;
+	z-index: 100;
+}
+.header .searchto-mv{
+	text-decoration: none;
+	color: black;
+}
+.header .searchto-mv:hover{
+	color: red;
+}

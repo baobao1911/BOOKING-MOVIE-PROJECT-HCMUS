@@ -8,7 +8,6 @@ import './payment.css';
 const Payment = () => {
     const location = useLocation()
     console.log(location.state)
-    const navigate = useNavigate()
     function setupTime(e){
       var d = new Date(e)
       return d.toLocaleString('es-us')

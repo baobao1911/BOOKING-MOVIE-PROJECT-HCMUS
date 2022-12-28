@@ -11,7 +11,7 @@ const MovieCard = ({ item }) => {
 
 	const handleNavigate = async (e)=>{
 		if(user){
-			navigate(`/seat/${item._id}`, { replace: true });
+			navigate(`/seat/${item._id}`);
 		}else{
 			navigate("/login", { replace: true });
 		}
