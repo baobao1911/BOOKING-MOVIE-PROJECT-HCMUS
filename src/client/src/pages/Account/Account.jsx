@@ -25,7 +25,7 @@ const Account = () => {
     // ==================== function =====================
     function handleSubmidaddmv(e){
         var checkbox = document.getElementById('btn-admin1')
-        if (e == true){
+        if (e === true){
             checkbox.style.display = "block";
           } else {
             checkbox.style.display = "none";
@@ -33,7 +33,7 @@ const Account = () => {
     }
     function handleCheckbox(e){
         var checkbox = document.getElementById("changepassword")
-        if (e == true){
+        if (e === true){
             checkbox.style.display = "block";
           } else {
             checkbox.style.display = "none";
@@ -103,11 +103,13 @@ const Account = () => {
         setInfor((prev) => ({ ...prev, [e.target.className]: e.target.value }));
 
     }
+    const [addcheck,setAddcheck] = useState(false)
     const handleAdd= async (e)=>{
         e.preventDefault();
         try {
             const res = await axios.post(`http://localhost:8000/api/movies`,info)
             console.log(res)
+            setAddcheck(true)
         } catch (err) {
             console.log(err)
         }
@@ -430,6 +432,11 @@ const Account = () => {
                                         <em>Đồng ý thêm phim</em>
                                         <div id="btn-admin1" className='btn-admin01'  style={{display:"none"}}  >
                                             <input type="button" value="Submit" onClick={handleAdd} />
+                                        </div>
+                                        <div>
+                                            {addcheck === true && (
+                                                <span style={{color:'red'}}>Phim đã được thêm vào kho phim</span>
+                                            )}
                                         </div>
                                     </div> 
 
