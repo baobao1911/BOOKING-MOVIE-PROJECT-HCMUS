@@ -64,3 +64,9 @@
 .header .searchto-mv:hover{
 	color: red;
 }
+
+.search-item{
+	background-color: white;
+	transform: translateX(-1px);
+	border-radius: 10px
+}

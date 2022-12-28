@@ -34,8 +34,8 @@ const Header = () => {
 			<div className="header">
 				<div className="headerList">
 					<div className="linkto">
-						<Link className="linkk" to={"/movie"}>Phim</Link>
-						<Link className="linkk" to={"/movie"}>Tin tức mới</Link>
+						<Link className="linkk" to={"/movie"}>Movie</Link>
+						<Link className="linkk" to={"/movie"}>News</Link>
 					</div>
 					<div className="search">
 						<input type="text" placeholder="Tìm kiếm" className="search-input"  onChange={e => setSearchContent(e.target.value)} />

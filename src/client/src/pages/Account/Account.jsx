@@ -455,7 +455,7 @@ const Account = () => {
 
                             <div className="my-account">
                                 <div className="page-title">
-                                    <h1>Xem só ghế đã bán của phim</h1>
+                                    <h1>Xem số ghế đã bán của phim</h1>
                                 </div>
                                 <div className='revenuemv'>
                                     <p><input type="text" placeholder='nhập tên phim' onChange={e => setRevenuemv(e.target.value)} className='revenue-name' /></p>
