@@ -14,6 +14,7 @@ import axios from 'axios'
 
 
 const Account = () => {
+
     const [page,setPage] = useState("1")
     const [avatar,setAvatar] = useState("https://www.redditstatic.com/avatars/avatar_default_01_A5A4A4.png")
 
@@ -384,23 +385,23 @@ const Account = () => {
                                     <ul>
                                         <li>
                                             <em>Tên phim</em>
-                                            <input type="text" name='name' className='name' onChange={e=> handleInfo(e)} placeholder='nhập tên phim' />
+                                            <input type="text" name='name' className='name' onChange={e=> handleInfo(e)} placeholder='Nhập tên phim' />
                                         </li>
                                         <li>
                                             <em>Thể loại</em>
-                                            <input type="text" name='categories' className='categories' placeholder='nhập Thể loại'  onChange={e=> handleInfo(e)}/>                                
+                                            <input type="text" name='categories' className='categories' placeholder='Nhập Thể loại'  onChange={e=> handleInfo(e)}/>                                
                                         </li>
                                         <li>
                                             <em>Đạo diễn</em>
-                                            <input type="text" name='author' className='author' placeholder='nhập tên Đạo diễn' onChange={e=> handleInfo(e)} />                                
+                                            <input type="text" name='author' className='author' placeholder='Nhập tên Đạo diễn' onChange={e=> handleInfo(e)} />                                
                                         </li>
                                         <li>
                                             <em>Mô tả chung</em>
-                                            <input type="text" name='desc' className='desc' placeholder='nhập mô tả chung về phim' onChange={e=> handleInfo(e)} />
+                                            <input type="text" name='desc' className='desc' placeholder='Nhập mô tả chung về phim' onChange={e=> handleInfo(e)} />
                                         </li>
                                         <li>
                                             <em>Diễn viên đóng phim</em>
-                                            <input type="text" name='cast' className='cast' placeholder='nhập tên các diễn viên' onChange={e=> handleInfo(e)} />
+                                            <input type="text" name='cast' className='cast' placeholder='Nhập tên các diễn viên' onChange={e=> handleInfo(e)} />
                                         </li>
                                         <li>
                                             <em>Ngày ra mắt</em>
@@ -408,23 +409,24 @@ const Account = () => {
                                         </li>
                                         <li>
                                             <em>Hình ảnh</em>
-                                            <input type="url" name='photos' className='photos' placeholder='nhập đường dẫn ảnh'onChange={e=> handleInfo(e)}  />
+                                            <input type="url" name='photos' className='photos' placeholder='Nhập đường dẫn ảnh'onChange={e=> handleInfo(e)}  />
                                         </li>
                                         <li>
                                             <em>Token trailer phim</em>
-                                            <input type="text" name='trailer' className='trailer' placeholder='nhập token trailer' onChange={e=> handleInfo(e)} />
+                                            <input type="text" name='trailer' className='trailer' placeholder='Nhập token trailer' onChange={e=> handleInfo(e)} />
                                         </li>
                                         <li>
                                             <em>Đánh giá</em>
-                                            <input type="number" name='rating' className='rating' min={0} max={5} step={0.1} onChange={e=> handleInfo(e)} />
+                                            <input type="number" name='rating' className='rating' placeholder='Đánh giá từ 0 đến 5 sao' min={0} max={5} step={0.1} onChange={e=> handleInfo(e)} />
+                                            
                                         </li>
                                         <li>
                                             <em>Địa chỉ rạp chiếu</em>
-                                            <input type="text" name='address' className='address' placeholder='nhập địa chỉ rạp chiếu' onChange={e=> handleInfo(e)} />
+                                            <input type="text" name='address' className='address' placeholder='Đường/Phường/Quận/TP ' onChange={e=> handleInfo(e)} />
                                         </li>
                                         <li>
                                             <em>Giá vé</em>
-                                            <input type="text" name='price' className='price' placeholder='nhập giá vé' onChange={e=> handleInfo(e)} />
+                                            <input type="text" name='price' className='price' placeholder='Nhập giá vé' onChange={e=> handleInfo(e)} />
                                         </li>
                                     </ul>
                                     <div className='checkbox-addmv'>
