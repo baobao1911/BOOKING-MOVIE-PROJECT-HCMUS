@@ -24,12 +24,12 @@ const Payment = () => {
                                       "amount": total,
                                       "payment_info": 'Thanh toán vé xem phim ' })
         console.log(res.data)
-        window.open(res.data.payUrl, '_blank', 'noopener,noreferrer');
+        window.open(res.data.payUrl,'_self', 'noopener,noreferrer');
       }catch(err){
         console.log(err)
       }
     }
-    
+
   return (
     <div>
       <Navbar/>

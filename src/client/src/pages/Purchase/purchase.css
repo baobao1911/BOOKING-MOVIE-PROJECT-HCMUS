@@ -1,0 +1,17 @@
+
+.F{
+    min-height: 500px;
+    
+}
+.container-pur {
+    text-align: center;
+}
+.container-pur div span{
+    top: auto;
+    bottom: auto;
+    font-size: 30px;
+
+}
+.container-pur div{
+    margin-bottom: 40px;
+}
