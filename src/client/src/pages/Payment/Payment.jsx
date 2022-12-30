@@ -15,7 +15,7 @@ const Payment = () => {
 
 
     async function handlePay (){
-      const total = location.state.id.length * 90000 
+      const total = location.state.id.length * 90000
       try{
         console.log(total)
         console.log(location.state.id[0]._id)
