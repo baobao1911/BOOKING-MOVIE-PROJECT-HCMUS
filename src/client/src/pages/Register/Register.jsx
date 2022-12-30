@@ -15,20 +15,22 @@ const Register = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPwd, setConfirmPwd] = useState("");
-	const [success, setSuccess] = useState(false);
 
-	const [notification,setNoti] = useState("")
+
 	const navigate = useNavigate()
 
 
+	const [notification,setNoti] = useState("")
+	const [success, setSuccess] = useState(false);
+	const [errEmail,setErrEmail] = useState(true)
 	const handleSubmit = async (e) => {
-		
-		if (password == confirmPwd){
+		if (password === confirmPwd && /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email) ){
 			e.preventDefault();
 			if (firstName.length < 1 || lastName.length  < 1 || username.length  < 1 || phone.length < 1){
 				setNoti("Không được để trống")
 				console.log(notification)
-			}else {
+			}
+			else {
 				try {
 					const res = await axios.post(
 						"http://localhost:8000/api/auth/register",
@@ -42,8 +44,6 @@ const Register = () => {
 				}
 			}
 		}
-		
-
 	};
 
 
@@ -95,6 +95,7 @@ const Register = () => {
 							<input type="email" name="email" ng-model="email" onChange={(e) => setEmail(e.target.value)}
 								placeholder="Email"
 								className="form-control" />
+							{email.length > 1 && !/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email) && <span className="checkpass"> Email không hợp lệ</span>}
 							<p></p>
 							<input
 								type="tel"
