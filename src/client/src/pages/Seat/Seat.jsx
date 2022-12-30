@@ -1,6 +1,6 @@
 import useFetch from "../../hooks/useFetch"
 import "./seat.css"
-import React, {useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { AuthContext } from '../../context/AuthContext'
@@ -9,145 +9,142 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
 const Seat = () => {
-    const location = useLocation()
-    const id = location.pathname.split("/")[2]
-    const { data, loading, error } =  useFetch(`http://localhost:8000/api/tickets/movies/${id}`)
+  const location = useLocation()
+  const id = location.pathname.split("/")[2]
+  const { data, loading, error } = useFetch(`http://localhost:8000/api/tickets/movies/${id}`)
+  const dataMv = location.state.id
+
+  const count = document.getElementById('count');
+  const total = document.getElementById('total');
+  const listseat = document.getElementById('lseat');
+
+  const [seatbooking, setSeatbooking] = useState([])
+  const [adrs, seatAdrs] = useState([])
+  const [time, setTime] = useState([])
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate()
+  //==============================
+  const [movie_id, setMvid] = useState("")
+  const [customer_id, setCsid] = useState("")
+  const [seat_number, setSeatnumber] = useState("")
+  const [address, setAddress] = useState("none")
+  const [date, setDate] = useState(new Date())
+  //==============================
+  function updateSelectedCount() {
+    const selectedSeats = document.querySelectorAll('.row .seat.selected');
+    const selectedSeatsCount = selectedSeats.length;
+    count.innerText = selectedSeatsCount;
+    total.innerText = selectedSeatsCount * 90000;
+    var arrseat = []
+
+    selectedSeats.forEach((e) => {
+      arrseat.push(e.getAttribute('value'))
+    })
+    listseat.innerText = arrseat
+  }
+
+  function setupSeat() {
+    var seat = document.getElementsByClassName('seat')
+    seat = [...seat]
+
+    data.forEach((val) => {
+    console.log(val.seat_number)
+    var idx = parseInt(val.seat_number,10)  + 2
+    seat[idx].classList.toggle('occupied')
+    })
 
 
-    const count = document.getElementById('count');
-    const total = document.getElementById('total');
-    const listseat = document.getElementById('lseat');
-    
-    const [seatbooking,setSeatbooking] = useState([])
-    const [adrs,seatAdrs] = useState([])
-    const [time,setTime] = useState([])
-    const { user } = useContext(AuthContext)
-    const navigate = useNavigate()
-    //==============================
-    const [movie_id,setMvid] = useState("") 
-    const [customer_id,setCsid] = useState("")
-    const [seat_number,setSeatnumber]  = useState("")
-    const [address,setAddress] = useState("none")
-    const [date,setDate] = useState(new Date())
-    //==============================
-    function updateSelectedCount() {
-      const selectedSeats = document.querySelectorAll('.row .seat.selected');
-      const selectedSeatsCount = selectedSeats.length;
-      count.innerText = selectedSeatsCount;
-      total.innerText = selectedSeatsCount * 90000;
-      var arrseat = []
+    seatAdrs(dataMv.address)
+    setTime(dataMv.dates)
+    setCsid(user.details._id)
+    setMvid(id)
+  }
 
-      selectedSeats.forEach((e) => {
-        arrseat.push(e.getAttribute('value'))
-      })
-      listseat.innerText = arrseat
+  useEffect(() => {
+    setupSeat()
+  }, [loading])
+
+  const handleClick = e => {
+    if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+      e.target.classList.toggle('selected');
     }
+    updateSelectedCount();
+    console.log(listseat.textContent)
+  };
 
-    function setupSeat () {
-      var seat = document.getElementsByClassName('seat')
-      seat = [...seat]
+  function setupTime(e) {
+    var d = new Date(e)
+    return d.toLocaleString('es-us')
+  }
 
-      setSeatbooking(data.booked_seats)
-
-      if (seatbooking !== undefined && !loading){
-        seatbooking.forEach((val)=>{
-          var idx = parseInt(val,10)  + 2
-          seat[idx].classList.toggle('occupied')
-        })
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    let temp = ((listseat.textContent).split(",")).map(i => Number(i));
+    var check = false
+    var arr = []
+    for (let i in temp) {
+      try {
+        console.log(movie_id)
+        console.log(customer_id)
+        console.log(temp[i])
+        console.log(address)
+        console.log(date)
+        console.log(dataMv.name)
+        const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,
+          { movie_id, customer_id, "seat_number": temp[i], address, date, "movie_name": dataMv.name ,"status":false});
+        arr.push(res.data)
+      } catch (err) {
+        console.log(err);
+        check = true
       }
-      seatAdrs(data.address)
-      setTime(data.dates)
-
-      setCsid(user.details._id)
-      setMvid(id)
     }
-  
-    useEffect(()=>{
-      setupSeat()
-    },[data])
-    
-    const handleClick = e => {
-      if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
-          e.target.classList.toggle('selected');
-      }
-      updateSelectedCount();
-      console.log(listseat.textContent)
-    };
+    navigate("/payment", { state: { id: arr, id_user: user.details._id } });
 
-    function setupTime(e){
-      var d = new Date(e)
-      return d.toLocaleString('es-us')
-    }
-
-    const handlePayment = async (e) =>{
-      e.preventDefault();
-      let temp = ((listseat.textContent).split(",")).map(i=>Number(i));
-      var check = false
-      var arr = []
-      for (let i in temp){
-        try {
-          console.log(movie_id)
-          console.log(customer_id)
-          console.log( temp[i])
-          console.log(address)
-          console.log(date)
-          console.log(data.name)
-          const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,
-                      {movie_id,customer_id,"seat_number":temp[i],address,date,"movie_name":data.name});
-          console.log(res.data);
-          arr.push(res.data)
-        } catch (err) {
-          console.log(err);
-          check = true
-        }
-      }
-      navigate("/payment", {state :{id : arr , id_user: user.details._id} });
-      
-    }
+  }
   //==================================================
   return (
     <section>
-      <Navbar/>
+      <Navbar />
 
-    {loading ? (
-      console.log("loading api")
-    ) : (
-      <div className="seat-movie-container"  >
-        <label htmlFor="seat-moviename">{data.name}</label>
-        
-        <ul className="showcase">
-          <li>
-          <div className="seat"></div>
-            <small>N/A</small>
-          </li>
-          <li>
-            <div className="seat selected"></div>
-            <small>Selected</small>
-          </li>
-          <li>
-          <div className="seat occupied"></div>
-            <small>Occupied</small>
-          </li>    
-        </ul>
+      {loading ? (
+        console.log("loading api")
+      ) : (
+        <div className="seat-movie-container"  >
+          <label htmlFor="seat-moviename">{dataMv.name}</label>
 
-        <select value={address} onChange={e => setAddress(e.target.value)} className="seat-address">
-          <option selected >Chọn rạp</option>
-          {adrs && adrs.map ((item,idx) => (
-            <option  key={idx} value={item}> {item}</option>
-          ))}
-        </select>
+          <ul className="showcase">
+            <li>
+              <div className="seat"></div>
+              <small>N/A</small>
+            </li>
+            <li>
+              <div className="seat selected"></div>
+              <small>Selected</small>
+            </li>
+            <li>
+              <div className="seat occupied"></div>
+              <small>Occupied</small>
+            </li>
+          </ul>
 
-        <select value={date} onChange={e=>setDate(e.target.value)} className="seat-time">
-          <option selected >Chọn giờ chiếu phim</option>
-          {time && time.map ((item,idx) => (
-            <option key={idx} value={item}> {setupTime(item)}</option>
-          ))}
-        </select>
-        
-        <div className="container">
-          <div className="screen"></div>
-          
-          <div className="row">
+          <select value={address} onChange={e => setAddress(e.target.value)} className="seat-address">
+            <option selected >Chọn rạp</option>
+            {adrs && adrs.map((item, idx) => (
+              <option key={idx} value={item}> {item}</option>
+            ))}
+          </select>
+
+          <select value={date} onChange={e => setDate(e.target.value)} className="seat-time">
+            <option selected >Chọn giờ chiếu phim</option>
+            {time && time.map((item, idx) => (
+              <option key={idx} value={item}> {setupTime(item)}</option>
+            ))}
+          </select>
+
+          <div className="container">
+            <div className="screen"></div>
+
+            <div className="row">
               <input onClick={handleClick} type="button" className='seat' value="1" />
               <input onClick={handleClick} type="button" className='seat' value="2" />
               <input onClick={handleClick} type="button" className='seat' value="3" />
@@ -207,22 +204,22 @@ const Seat = () => {
               <input onClick={handleClick} type="button" className='seat' value="47" />
               <input onClick={handleClick} type="button" className='seat' value="48" />
             </div>
-          
-          <p className="text">
-            You have selected <span id="count">0</span> seats
-            <br/>
-            Total price : <span id="total">0</span>
-            <br/>
-            Your Seat : <span id="lseat">none</span>
-          </p>
-          <input type="button" value="payment" onClick={handlePayment}/>
 
+            <p className="text">
+              You have selected <span id="count">0</span> seats
+              <br />
+              Total price : <span id="total">0</span>
+              <br />
+              Your Seat : <span id="lseat">none</span>
+            </p>
+            <input type="button" value="payment" onClick={handlePayment} />
+
+          </div>
         </div>
-      </div>
       )}
-      <Footer/>
+      <Footer />
     </section>
-    )
+  )
 }
 
 export default Seat

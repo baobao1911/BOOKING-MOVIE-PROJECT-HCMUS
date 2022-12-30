@@ -8,7 +8,7 @@ const Purchase = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	// single-time read
 	const params = Object.fromEntries([...searchParams]);
-    const resultCode = params.get('resultCode');
+    // const resultCode = params.get('resultCode');
 
 	return (
 		<div>

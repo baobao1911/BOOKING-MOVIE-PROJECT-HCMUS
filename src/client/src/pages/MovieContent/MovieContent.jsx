@@ -26,7 +26,7 @@ const MovieContent = () => {
 
 	const handleClick = () => {
 		if (user) {
-			navigate(`/seat/${data._id}`);
+			navigate(`/seat/${data._id}`,{state: {id:data}});
 		} else {
 			navigate("/login");
 		}
