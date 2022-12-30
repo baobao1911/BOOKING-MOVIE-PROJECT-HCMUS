@@ -25,6 +25,10 @@ const TicketSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: Boolean,
+      required: true,
+    }
   },
   { timestamps: true }
 );

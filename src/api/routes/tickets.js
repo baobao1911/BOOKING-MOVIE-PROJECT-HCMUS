@@ -16,19 +16,19 @@ const router = express.Router();
 router.post("/:id/:movie_id", createTicket);
 
 // Update ticket
-router.put("/:id", verifyAdmin, updateTicket);
+router.put("/:id", updateTicket);
 
 // Delete ticket
-router.delete("/:movie_id", verifyAdmin, deleteTicket);
+router.delete("/:id/:movie_id", deleteTicket);
 
 // Get a ticket
-router.get("/:id", verifyAdmin, getTicket);
+router.get("/:id", getTicket);
 
 // Get all user's tickets
 router.get("/users/:id", getAllTicketsOfAnUser);
 
 // Get all movies's tickets
-router.get("/movies/:movie_id", verifyAdmin, getAllTicketsOfAMovie);
+router.get("/movies/:movie_id", getAllTicketsOfAMovie);
 
 // Get all tickets
 router.get("/", getAllTickets);

@@ -9,6 +9,7 @@ import Seat from "./pages/Seat/Seat";
 import Account from "./pages/Account/Account";
 import Something from "./pages/NothingPage/Something";
 import Payment from "./pages/Payment/Payment";
+import Purchase from "./pages/Purchase/Purchase";
 
 function App() {
 	return (
@@ -23,7 +24,7 @@ function App() {
 				<Route path="/account" element={<Account />} />
 				<Route path="/NothingPage" element={<Something/>}/>
 				<Route path="/payment" element={<Payment/>}/>
-				{/* <Route path="/purchase" element={<Purchase />}/> */}
+				<Route path="/purchase_status" element={<Purchase />}/>
 			</Routes>
 		</BrowserRouter>
 	);

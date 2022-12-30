@@ -71,22 +71,9 @@ const checkTransactionStatus = async (req, res, next) => {
 		const data = {
 			partnerCode: MOMO_PARTNER_CODE,
 			requestId: id,
-			amount: newPayment.amount,
 			orderId: id,
-			orderInfo: newPayment.payment_info,
-			redirectUrl: "http://localhost:3000",
-			ipnUrl: "http://localhost:8000/api/payments/ipn",
-			requestType: "captureWallet",
-			extraData: "",
-			lang: "vi",
+			lang: "vi"
 		};
-
-		const newData = {
-			partnerCode: MOMO_PARTNER_CODE,
-			requestId: id,
-			orderId: id,
-			lang: "vi",
-		}
 
 		const message = `accessKey=${MOMO_ACCESS_KEY}&orderId=${data.orderId}&partnerCode=${data.partnerCode}&requestId=${data.requestId}`;
 		newData.signature = createHmac("sha256", MOMO_SECRET_KEY)
@@ -99,7 +86,7 @@ const checkTransactionStatus = async (req, res, next) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(newData),
+			body: JSON.stringify(data),
 		}).then(async (result) => {
 			const json = await result.json();
 			res.status(200).json(json);

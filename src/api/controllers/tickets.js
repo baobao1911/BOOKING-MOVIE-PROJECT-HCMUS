@@ -14,13 +14,13 @@ const createTicket = async (req, res, next) => {
 		if (movie === null) {
 			throw new Error("Movie is not exist");
 		}
-		if (movie.booked_seats.indexOf(newTicket.seat_number) >= 0) {
-			throw new Error("Invalid seat");
-		}
+		// if (movie.booked_seats.indexOf(newTicket.seat_number) >= 0) {
+		// 	throw new Error("Invalid seat");
+		// }
 
 		let savedTicket = await newTicket.save();
 		await Movie.findByIdAndUpdate(movieId, {
-			$addToSet: {
+			$push: {
 				booked_tickets: savedTicket._id,
 				booked_seats: savedTicket.seat_number,
 			},
@@ -29,8 +29,6 @@ const createTicket = async (req, res, next) => {
 	} catch (err) {
 		if (err.message === "Invalid seat") {
 			next(createError(409, "The seat has been booked."));
-		// } else if (err.message !== null) {
-		// 	next(createError(500, err));
 		} else {
 			next(err);
 		}
@@ -86,7 +84,7 @@ const getTicket = async (req, res, next) => {
 const getAllTicketsOfAMovie = async (req, res, next) => {
 	const movieId = req.params.movie_id;
 	try {
-		const allTickets = await Ticket.find({ movie_id: movieId }).limit(
+		const allTickets = await Ticket.find({ movie_id: movieId, status: true }).limit(
 			req.query.limit
 		);
 		res.status(200).json(allTickets);
@@ -99,7 +97,7 @@ const getAllTicketsOfAMovie = async (req, res, next) => {
 const getAllTicketsOfAnUser = async (req, res, next) => {
 	const userId = req.params.id;
 	try {
-		const allTickets = await Ticket.find({ customer_id: userId }).limit(
+		const allTickets = await Ticket.find({ customer_id: userId, status: true }).limit(
 			req.query.limit
 		);
 		res.status(200).json(allTickets);
