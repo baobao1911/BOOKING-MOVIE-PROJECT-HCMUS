@@ -12,23 +12,15 @@ const Header = () => {
 		"http://localhost:8000/api/movies"
 	);
 
-	function handleSearch (){
-		if (!loading){
-			return (
-				<ul className="ul-search">
-					{data.filter((item)=>
-						item.name.toLowerCase().includes(searchContent)
-					).map((item)=>(
-						<li key={item._id} className='search-item'>
-							<Link className="searchto-mv" to={`/movie/${item._id}`}>{item.name}</Link>
-						</li>
-					))
-					}
-				</ul>
-			)
-		}
-	}
-	const temp = handleSearch()
+	// function handleSearch (){
+	// 	if (!loading){
+	// 		return (
+					
+					
+	// 		)
+	// 	}
+	// }
+	// const temp = handleSearch()
 	return (
 		<div className="header-container">
 			<div className="header">
@@ -37,11 +29,21 @@ const Header = () => {
 						<Link className="linkk" to={"/movie"}>Movie</Link>
 						<Link className="linkk" to={"/movie"}>News</Link>
 					</div>
-					<div className="search">
-						<input type="text" placeholder="Tìm kiếm" className="search-input"  onChange={e => setSearchContent(e.target.value)} />
-						<button className="btn-search" onClick={handleSearch}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-						<div>
-							{searchContent.length > 0 && temp }
+
+					<div className="search-container">
+						<div className="search">
+							<input type="text" placeholder="Tìm kiếm" className="search-input"  onChange={e => setSearchContent(e.target.value)} />
+							<div className="autocom-box">
+								{searchContent.length > 0 && (data.filter((item)=>
+									item.name.toLowerCase().includes(searchContent)
+									).map((item)=>(
+										<li key={item._id} className='search-item'>
+											<Link className="searchto-mv" to={`/movie/${item._id}`}>{item.name}</Link>
+										</li>
+								))) }
+							</div>
+							<button className="btn-search" ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+							
 						</div>
 					</div>
 				</div>

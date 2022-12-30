@@ -35,7 +35,7 @@ const payPayment = async (req, res, next) => {
 			amount: newPayment.amount,
 			orderId: id,
 			orderInfo: newPayment.payment_info,
-			redirectUrl: "http://localhost:3000",
+			redirectUrl: "http://localhost:3000/purchase_status",
 			ipnUrl: "http://localhost:8000/api/payments/ipn",
 			requestType: "captureWallet",
 			extraData: "",

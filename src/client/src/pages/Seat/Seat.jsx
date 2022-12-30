@@ -11,7 +11,7 @@ import Footer from "../../components/Footer/Footer";
 const Seat = () => {
     const location = useLocation()
     const id = location.pathname.split("/")[2]
-    const { data, loading, error } =  useFetch(`http://localhost:8000/api/movies/find/${id}`)
+    const { data, loading, error } =  useFetch(`http://localhost:8000/api/tickets/movies/${id}`)
 
 
     const count = document.getElementById('count');
