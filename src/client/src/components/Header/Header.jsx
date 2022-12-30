@@ -41,7 +41,7 @@ const Header = () => {
 						<input type="text" placeholder="Tìm kiếm" className="search-input"  onChange={e => setSearchContent(e.target.value)} />
 						<button className="btn-search" onClick={handleSearch}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
 						<div>
-							{searchContent.length > 1 && temp }
+							{searchContent.length > 0 && temp }
 						</div>
 					</div>
 				</div>

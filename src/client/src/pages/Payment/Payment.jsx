@@ -29,6 +29,7 @@ const Payment = () => {
         console.log(err)
       }
     }
+    
   return (
     <div>
       <Navbar/>
