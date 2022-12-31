@@ -26,8 +26,13 @@ function verifySignature(data) {
 
 // Pay a payment
 const payPayment = async (req, res, next) => {
+
+	console.log(req.body);
 	const id = req.params.id;
+	const listIds = req.body.listIds;
+
 	const newPayment = new Payment(req.body);
+	console.log(newPayment);
 	try {
 		const data = {
 			partnerCode: MOMO_PARTNER_CODE,
@@ -38,7 +43,7 @@ const payPayment = async (req, res, next) => {
 			redirectUrl: "http://localhost:3000/purchase_status",
 			ipnUrl: "http://localhost:8000/api/payments/ipn",
 			requestType: "captureWallet",
-			extraData: "",
+			extraData: JSON.stringify(listIds),
 			lang: "vi",
 		};
 
@@ -65,6 +70,8 @@ const payPayment = async (req, res, next) => {
 
 const checkTransactionStatus = async (req, res, next) => {
 	const id = req.params.id;
+	const listIds = req.body.listIds;
+
 	const newPayment = new Payment(req.body);
 	console.log(newPayment);
 	try {
