@@ -48,7 +48,6 @@ const Seat = () => {
     seat = [...seat]
 
     data.forEach((val) => {
-    console.log(val.seat_number)
     var idx = parseInt(val.seat_number,10)  + 2
     seat[idx].classList.toggle('occupied')
     })
@@ -84,12 +83,6 @@ const Seat = () => {
     var arr = []
     for (let i in temp) {
       try {
-        console.log(movie_id)
-        console.log(customer_id)
-        console.log(temp[i])
-        console.log(address)
-        console.log(date)
-        console.log(dataMv.name)
         const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,
           { movie_id, customer_id, "seat_number": temp[i], address, date, "movie_name": dataMv.name ,"status":false});
         arr.push(res.data)
@@ -106,9 +99,7 @@ const Seat = () => {
     <section>
       <Navbar />
 
-      {loading ? (
-        console.log("loading api")
-      ) : (
+      {loading === false && (
         <div className="seat-movie-container"  >
           <label htmlFor="seat-moviename">{dataMv.name}</label>
 
@@ -212,7 +203,9 @@ const Seat = () => {
               <br />
               Your Seat : <span id="lseat">none</span>
             </p>
-            <input type="button" value="payment" onClick={handlePayment} />
+            <div className="c-btn-pay">
+              <input type="button" className="btn-pay" value="Tới trang thanh toán" onClick={handlePayment} />
+            </div>
 
           </div>
         </div>

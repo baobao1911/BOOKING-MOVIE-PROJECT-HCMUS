@@ -64,11 +64,11 @@ font-size: 15px
 }
 
 .pay {
-    border-radius: 10px;
-    width: 30%;
+    border-radius: 30px;
+    width: 20%;
     margin-bottom: 10px;
     background-color: #CD2626;
-    height: 50px;
+    height: 45px;
     font-size: 20px;
     /* text-align: center; */
     color: black

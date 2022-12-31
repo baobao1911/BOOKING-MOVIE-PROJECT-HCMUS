@@ -21,14 +21,16 @@ const Payment = () => {
       location.state.id.forEach((te)=>{
         lId.push(te._id)
       })
+
       console.log(lId)
+      
       try{
         console.log(location.state.id[0]._id)
         const res = await axios.post(`http://localhost:8000/api/payments/pay/${location.state.id[0]._id}`,
                                       {"service_name": "MOMO",
                                       "amount": total,
                                       "payment_info": 'Thanh toán vé xem phim ',
-                                      "info_id":lId})
+                                      "listIds":lId})
         window.open(res.data.payUrl,'_self', 'noopener,noreferrer');
       }catch(err){
         console.log(err)
@@ -41,7 +43,7 @@ const Payment = () => {
       <div className='payment'>
         <div className='payment-conatiner'>
           <div className="page-title">
-            PAYMENT
+            Thông tin vé đã đặt
           </div>
           <table className='h-table'>
             <tr>
@@ -78,13 +80,13 @@ const Payment = () => {
             
             </tbody>
           </table>
-          <h1>Total prices </h1>
-          <h2>{location.state.id.length * 90000}</h2>
+          <h1>Tổng tiền vé  </h1>
+          <h3>{location.state.id.length * 90000} vnđ</h3>
           <button
 									onClick={handlePay}
 									className="pay"
 								>
-									Payment
+									Paynow
 								</button>
         </div>
       </div>

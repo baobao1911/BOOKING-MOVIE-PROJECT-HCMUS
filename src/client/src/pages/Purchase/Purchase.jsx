@@ -10,31 +10,35 @@ const Purchase = () => {
 	// single-time read
 	const params = Object.fromEntries([...searchParams]);
     // const resultCode = params.get('resultCode');
-	var check = false
-	const {data , loading,error} = useFetch(`http://localhost:8000/api/payments/callback/${params.orderId}`)
-	console.log(data)
+	const [checkLoad,setCheckLoad] = useState(false)
+	// const {data , loading,error} = useFetch(`http://localhost:8000/api/payments/callback/${params.orderId}`)
+	const arrz = []
+
 	async function handleUpdateTicket (){
-
-		if(loading === false){
-			
+		(JSON.parse(params.extraData)).forEach((val)=>{
+			arrz.push(val)
+		})
+		console.log(arrz)
+		for(let i in arrz){
+			try{
+				console.log(arrz[i])
+				const res = await axios.put(`http://localhost:8000/api/tickets/${arrz[i]}`,{"status":true})
+				console.log(res)
+			}catch(err){
+				console.log('err')
+				console.log(err)
+			}
 		}
-
-		try{
-			const res = await axios.put(`http://localhost:8000/api/tickets/${params.orderId}`,{"status":true})
-			
-			console.log(res)
-			check = true
-		}catch(err){
-			console.log('err')
-			console.log(err)
-		}
+		setCheckLoad(true)
 	}
 
+		
+
 	useEffect(()=>{
-		if(check === false){
+		if(checkLoad === false){
 			handleUpdateTicket()
 		}
-	},[check])
+	},[])
 	// const info = (<table className='h-table'>
 	// 				<tr>
 	// 					<th >Id </th>
