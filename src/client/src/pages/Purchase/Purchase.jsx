@@ -10,22 +10,31 @@ const Purchase = () => {
 	// single-time read
 	const params = Object.fromEntries([...searchParams]);
     // const resultCode = params.get('resultCode');
-
+	var check = false
+	const {data , loading,error} = useFetch(`http://localhost:8000/api/payments/callback/${params.orderId}`)
+	console.log(data)
 	async function handleUpdateTicket (){
+
+		if(loading === false){
+			
+		}
+
 		try{
 			const res = await axios.put(`http://localhost:8000/api/tickets/${params.orderId}`,{"status":true})
-
+			
 			console.log(res)
+			check = true
 		}catch(err){
 			console.log('err')
 			console.log(err)
 		}
 	}
 
-	handleUpdateTicket()
 	useEffect(()=>{
-		handleUpdateTicket()
-	},[])
+		if(check === false){
+			handleUpdateTicket()
+		}
+	},[check])
 	// const info = (<table className='h-table'>
 	// 				<tr>
 	// 					<th >Id </th>

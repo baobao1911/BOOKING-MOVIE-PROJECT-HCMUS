@@ -7,7 +7,7 @@ import './payment.css';
 
 const Payment = () => {
     const location = useLocation()
-    console.log(location.state)
+    // console.log(location.state)
     function setupTime(e){
       var d = new Date(e)
       return d.toLocaleString('es-us')
@@ -16,14 +16,19 @@ const Payment = () => {
 
     async function handlePay (){
       const total = location.state.id.length * 90000
+      const lId = []
+      
+      location.state.id.forEach((te)=>{
+        lId.push(te._id)
+      })
+      console.log(lId)
       try{
-        console.log(total)
         console.log(location.state.id[0]._id)
         const res = await axios.post(`http://localhost:8000/api/payments/pay/${location.state.id[0]._id}`,
                                       {"service_name": "MOMO",
                                       "amount": total,
-                                      "payment_info": 'Thanh toán vé xem phim ' })
-        console.log(res.data)
+                                      "payment_info": 'Thanh toán vé xem phim ',
+                                      "info_id":lId})
         window.open(res.data.payUrl,'_self', 'noopener,noreferrer');
       }catch(err){
         console.log(err)

@@ -13,6 +13,10 @@ const PaymentSchema = new mongoose.Schema(
         payment_info: {
             type: String,
             required: true,
+        },
+        info_id:{
+            type:[String],
+            require :true,
         }
 	}, {timestamps: true}
 );
