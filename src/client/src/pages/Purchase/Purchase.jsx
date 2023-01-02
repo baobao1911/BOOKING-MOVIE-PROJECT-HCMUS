@@ -36,7 +36,9 @@ const Purchase = () => {
 
 	useEffect(()=>{
 		if(checkLoad === false){
-			handleUpdateTicket()
+			if (parseInt(params.resultCode,10) === 0 ){
+				handleUpdateTicket()
+			}
 		}
 	},[])
 	// const info = (<table className='h-table'>

@@ -23,12 +23,14 @@ const Seat = () => {
   const [time, setTime] = useState([])
   const { user } = useContext(AuthContext)
   const navigate = useNavigate()
+
+  const [checkT,setCheckT] = useState(0)
   //==============================
   const [movie_id, setMvid] = useState("")
   const [customer_id, setCsid] = useState("")
   const [seat_number, setSeatnumber] = useState("")
   const [address, setAddress] = useState("none")
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState("none")
   //==============================
   function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected');
@@ -43,15 +45,16 @@ const Seat = () => {
     listseat.innerText = arrseat
   }
 
+  const [checkload,setCheckload] = useState(false)
   function setupSeat() {
-    var seat = document.getElementsByClassName('seat')
-    seat = [...seat]
 
-    data.forEach((val) => {
-    var idx = parseInt(val.seat_number,10)  + 2
-    seat[idx].classList.toggle('occupied')
-    })
+      var seat = document.getElementsByClassName('seat')
+      seat = [...seat]
 
+      data.forEach((val) => {
+      var idx = parseInt(val.seat_number,10)  + 2
+      seat[idx].classList.toggle('occupied')
+      })
 
     seatAdrs(dataMv.address)
     setTime(dataMv.dates)
@@ -60,8 +63,8 @@ const Seat = () => {
   }
 
   useEffect(() => {
-    setupSeat()
-  }, [loading])
+      setupSeat()
+  },[loading])
 
   const handleClick = e => {
     if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
@@ -73,26 +76,37 @@ const Seat = () => {
 
   function setupTime(e) {
     var d = new Date(e)
-    return d.toLocaleString('es-us')
+    return d.toLocaleString('es-us',{ hour12: false,
+                                      day:"numeric", 
+                                      month:"numeric",
+                                      year: "numeric",
+                                      hour: "numeric", 
+                                      minute: "numeric"})
   }
 
   const handlePayment = async (e) => {
     e.preventDefault();
     let temp = ((listseat.textContent).split(",")).map(i => Number(i));
-    var check = false
-    var arr = []
-    for (let i in temp) {
-      try {
-        const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,
-          { movie_id, customer_id, "seat_number": temp[i], address, date, "movie_name": dataMv.name ,"status":false});
-        arr.push(res.data)
-      } catch (err) {
-        console.log(err);
-        check = true
-      }
-    }
-    navigate("/payment", { state: { id: arr, id_user: user.details._id } });
 
+    if (address === 'none' || address === 'Chọn rạp' || date === 'none'|| date === 'Chọn giờ chiếu phim'){
+      setCheckT(1)
+    }
+    else if ((temp.length === 1 && isNaN(temp[0])) || temp[0] === 0){
+      setCheckT(2)
+    }
+    else{
+      var arr = []
+        for (let i in temp) {
+          try {
+            const res = await axios.post(`http://localhost:8000/api/tickets/${customer_id}/${movie_id}`,
+              { movie_id, customer_id, "seat_number": temp[i], address, date, "movie_name": dataMv.name ,"status":false});
+            arr.push(res.data)
+          } catch (err) {
+            console.log(err);
+          }
+        }
+        navigate("/payment", { state: { id: arr, id_user: user.details._id } });
+    }
   }
   //==================================================
   return (
@@ -206,6 +220,12 @@ const Seat = () => {
             <div className="c-btn-pay">
               <input type="button" className="btn-pay" value="Tới trang thanh toán" onClick={handlePayment} />
             </div>
+            <br/>
+            <div>
+              {checkT === 1 && <span>Vui lòng chọn địa chỉ rạp và thời gia chiếu phim</span>}
+              {checkT === 2 && <span>Oop!! Có vẻ bạn chưa chọn ghế .</span>}
+            </div>
+
 
           </div>
         </div>
