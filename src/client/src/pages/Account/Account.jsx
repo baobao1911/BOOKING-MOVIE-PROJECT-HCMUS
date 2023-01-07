@@ -81,9 +81,7 @@ const Account = () => {
                 console.log(err)
             }
         }
-        // console.log(username)
-        // console.log(phone)
-        // console.log(newpass)
+
     }
     const [info,setInfor] = useState({
         name: "",
