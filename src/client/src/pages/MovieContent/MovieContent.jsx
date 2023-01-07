@@ -22,7 +22,6 @@ const MovieContent = () => {
 	const { user } = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	console.log(data);
 
 	const handleClick = () => {
 		if (user) {

@@ -16,6 +16,14 @@ const MovieCard = ({ item }) => {
 			navigate("/login", { replace: true });
 		}
 	}
+	function setupTime(e) {
+		var d = new Date(e)
+		return d.toLocaleString('es-us',{ hour12: false,
+										  day:"numeric", 
+										  month:"numeric",
+										  year: "numeric",
+										})
+	  }
 	return (
 		<section className="movie-container" key={item._id}>
 			<div className="movie-content">
@@ -44,13 +52,13 @@ const MovieCard = ({ item }) => {
 						
 						<div className="container-start-time">
 							<div className="start-time">
-								<span>20/10/2022 - Saturday</span>
+								<span>{setupTime(item.dates)}</span>
 							</div>
 						</div>
 						
 						<div className="container-rating">
 							<div className="rating">
-							<span>Rating: 3.5</span>
+							<span>Rating: {item.rating}</span>
 							</div>
 						</div>
 
